@@ -4,6 +4,11 @@ body {
   font-family: sans-serif;
 }
 
+.main-container {
+  background-color: #fff;
+  min-height: 90vh;
+}
+
 .ant-menu-inline .ant-menu-item {
   margin-top: 0 !important;
   margin-bottom: 0 !important;
