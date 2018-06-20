@@ -18,3 +18,21 @@ body {
   margin-top: 0 !important;
   margin-bottom: 0 !important;
 }
+
+.main-container .ant-card-body {
+  padding: 10px;
+}
+
+.main-container .ant-card-cover {
+  padding: 5px;
+}
+
+.main-container .ant-card-cover img {
+  height: 86px;
+  margin: auto;
+  width: 90px;
+}
+
+.main-container .ant-card-body {
+  height: 86px;
+}

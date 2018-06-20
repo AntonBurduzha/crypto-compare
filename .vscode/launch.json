@@ -4,9 +4,9 @@
         {
             "type": "chrome",
             "request": "launch",
-            "name": "Запустить Chrome для localhost",
+            "name": "Chrome",
             "url": "http://localhost:3000",
-            "webRoot": "${workspaceFolder}"
+            "webRoot": "${workspaceRoot}/src"
         }
     ]
 }
