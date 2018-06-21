@@ -20,6 +20,7 @@ body {
 }
 
 .main-container .ant-card-body {
+  height: 86px;
   padding: 10px;
 }
 
@@ -31,8 +32,4 @@ body {
   height: 86px;
   margin: auto;
   width: 90px;
-}
-
-.main-container .ant-card-body {
-  height: 86px;
 }

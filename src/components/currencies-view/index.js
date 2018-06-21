@@ -22,10 +22,10 @@ class CurrenciesView extends Component {
         <div className="main-container">
           <Row type="flex" justify="start" gutter={16} style={{margin: '0'}}>
             {
-              Object.keys(fullList).length &&
+              fullList.length &&
                 <Col span={24}>
                   <Pagination
-                    total={Object.keys(fullList).length}
+                    total={fullList.length}
                     showTotal={(total, range) => {
                       return `${range[0]}-${range[1]} of ${total} items`}
                     }
@@ -37,7 +37,7 @@ class CurrenciesView extends Component {
                 </Col>
             }
             {
-              Object.values(pageList).map(item => {
+              pageList.map(item => {
                 return (
                   <Col span={3} key={item.Id}>
                     <Card
