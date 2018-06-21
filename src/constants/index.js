@@ -2,7 +2,7 @@
 export const CRYPRO_COMPARE_NEW_API = 'https://min-api.cryptocompare.com';
 export const CRYPRO_COMPARE_OLD_API = 'https://www.cryptocompare.com';
 
-//components constants
+// components constants
 export const PAGE_SIZE = 32;
 
 // actions constants

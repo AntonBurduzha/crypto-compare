@@ -1,19 +1,19 @@
-import { call, put, takeEvery, select } from 'redux-saga/effects'
-import * as constants from '../constants';
+import { call, put, takeEvery, select } from 'redux-saga/effects';
 import { notification } from 'antd';
-import { getCryptoCurrenciesList } from '../api';
+import * as constants from '../constants';
+import Api from '../api';
 
 function* fetchCurrencies() {
-   try {
-      const { Data: list } = yield call(getCryptoCurrenciesList);
-      yield put({ type: constants.SUCCESS_CRYPTO_CURRENCIES, list: Object.values(list) });
-   } catch (e) {
-      yield put({ type: constants.FAILED_CRYPTO_CURRENCIES });
-      notification.error({
-        message: 'Unexpected result!',
-        description: 'Something went wrong. Try later or go away from this app.',
-      });
-   }
+  try {
+    const { Data: list } = yield call(Api.getCryptoCurrenciesList);
+    yield put({ type: constants.SUCCESS_CRYPTO_CURRENCIES, list: Object.values(list) });
+  } catch (e) {
+    yield put({ type: constants.FAILED_CRYPTO_CURRENCIES });
+    notification.error({
+      message: 'Unexpected result!',
+      description: 'Something went wrong. Try later or go away from this app.',
+    });
+  }
 }
 
 export function* fetchCurrenciesRequest() {
@@ -38,5 +38,5 @@ function* setNextPage({ index }) {
 }
 
 export function* getNextPage() {
- yield takeEvery(constants.GET_NEXT_PAGE, setNextPage);
+  yield takeEvery(constants.GET_NEXT_PAGE, setNextPage);
 }

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { bindActionCreators } from'redux';
+import { bindActionCreators } from 'redux';
 import { Spin } from 'antd';
 import * as currenciesActions from '../../actions';
 import { ErrorMessage } from '../shared/ErrorMessage';
@@ -17,9 +17,9 @@ class CurrenciesView extends Component {
     return (
       <Spin tip="Loading..." spinning={fetching}>
         <div className="main-container">
-          <CurrenciesPagination/>
-          <CurrenciesList list={pageList}/>
-          { error && <ErrorMessage/> }
+          <CurrenciesPagination />
+          <CurrenciesList list={pageList} />
+          { error && <ErrorMessage /> }
         </div>
       </Spin>
     );
