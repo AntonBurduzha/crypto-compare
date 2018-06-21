@@ -2,7 +2,7 @@ import React from 'react';
 import { Layout } from 'antd';
 import Footer from './layout/Footer';
 import Sidebar from './layout/Sidebar';
-import CurrenciesView from './currencies-view';
+import CurrenciesView from './currencies/CurrenciesView';
 import { notification } from 'antd';
 
 notification.config({ duration: 3 });

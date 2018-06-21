@@ -7,6 +7,7 @@ body {
 .main-container {
   background-color: #fff;
   min-height: 90vh;
+  padding: 10px 0;
 }
 
 .ant-menu-inline .ant-menu-item {
