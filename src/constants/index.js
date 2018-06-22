@@ -12,3 +12,11 @@ export const FAILED_CRYPTO_CURRENCIES = 'FAILED_CRYPTO_CURRENCIES';
 
 export const SET_NEXT_PAGE = 'SET_NEXT_PAGE';
 export const GET_NEXT_PAGE = 'GET_NEXT_PAGE';
+
+export const SET_NEXT_TAB = 'SET_NEXT_TAB';
+
+export const NAV_TABS = Object.freeze({
+  LIST: 'list',
+  MARKET_BTC: 'marketBTC',
+  MARKET_ETH: 'marketETH'
+});

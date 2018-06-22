@@ -1,6 +1,6 @@
 import React from 'react';
-import { CRYPRO_COMPARE_OLD_API } from '../../constants';
 import { Row, Col, Card } from 'antd';
+import { CRYPRO_COMPARE_OLD_API } from '../../constants';
 
 const CurrenciesList = ({ list }) =>
   <Row type="flex" justify="start" gutter={16} style={{margin: '0', padding: '0 20px' }}>
@@ -10,7 +10,11 @@ const CurrenciesList = ({ list }) =>
             <Card
               hoverable
               style={{ width: 140, textAlign: 'center' }}
-              cover={<img alt={item.FullName} src={`${CRYPRO_COMPARE_OLD_API}${item.ImageUrl}`}/>}
+              cover={
+                <a href={`${CRYPRO_COMPARE_OLD_API}${item.Url}`} target="_blank">
+                  <img alt={item.FullName} src={`${CRYPRO_COMPARE_OLD_API}${item.ImageUrl}`}/>
+                </a>
+              }
             >
               <Card.Meta title={item.Symbol} description={item.CoinName}/>
             </Card>
