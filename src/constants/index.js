@@ -15,6 +15,9 @@ export const GET_NEXT_PAGE = 'GET_NEXT_PAGE';
 
 export const SET_NEXT_TAB = 'SET_NEXT_TAB';
 
+export const GET_CURRENT_CC_STATE = 'GET_CURRENT_CC_STATE';
+export const SET_CURRENT_CC_STATE = 'SET_CURRENT_CC_STATE';
+
 export const NAV_TABS = Object.freeze({
   LIST: 'list',
   MARKET_BTC: 'marketBTC',

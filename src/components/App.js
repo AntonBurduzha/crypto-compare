@@ -4,6 +4,7 @@ import { Layout, notification } from 'antd';
 import Footer from './layout/Footer';
 import Sidebar from './layout/Sidebar';
 import CurrenciesView from './currencies/CurrenciesView';
+import MarketBTC from './currency-market';
 import { NAV_TABS } from '../constants';
 
 notification.config({ duration: 3 });
@@ -15,10 +16,10 @@ const App = ({ tab }) => {
       content = <CurrenciesView/>;
       break;
     case NAV_TABS.MARKET_BTC:
-      content = <CurrenciesView/>;
+      content = <MarketBTC/>;
       break;
     case NAV_TABS.MARKET_ETH:
-      content = <CurrenciesView/>;
+      content = <MarketBTC/>;
       break;
     default:
       content = <h1>WTF!!!</h1>
