@@ -42,7 +42,7 @@ CCC.STATIC.CURRENCY.SYMBOL = {
   'BRL': 'R$'
 };
 
-CCC.STATIC.CURRENCY.getSymbol = function(symbol) {
+CCC.STATIC.CURRENCY.getSymbol = symbol => {
   return CCC.STATIC.CURRENCY.SYMBOL[symbol] || symbol;
 };
 
@@ -410,23 +410,23 @@ CCC.FULLVOLUME.unpack = function(volStr) {
 CCC.FULLVOLUME.pack = function(volObj) {
   var packedVol = '';
   var fields = this.FIELDS;
-  
+
   for(var property in fields) {
     if (volObj.hasOwnProperty(property) && fields[property] == 0) {
-      packedVol += '~' + volObj[property];  
+      packedVol += '~' + volObj[property];
     }
   }
   return packedVol.substr(1);
 };
 
-CCC.noExponents = function(value) {
-  var data = String(value).split(/[eE]/);
+CCC.noExponents = value => {
+  const data = String(value).split(/[eE]/);
   if (data.length == 1) return data[0];
 
-  var z = '',
-    sign = value < 0 ? '-' : '',
-    str = data[0].replace('.', ''),
-    mag = Number(data[1]) + 1;
+  let z = '';
+  const sign = value < 0 ? '-' : '';
+  const str = data[0].replace('.', '');
+  let mag = Number(data[1]) + 1;
 
   if (mag < 0) {
     z = sign + '0.';
@@ -438,22 +438,22 @@ CCC.noExponents = function(value) {
   return str + z;
 };
 
-CCC.filterNumberFunctionPolyfill = function(value, decimals) {
-  var decimalsDenominator = Math.pow(10, decimals);
-  var numberWithCorrectDecimals = Math.round(value * decimalsDenominator) / decimalsDenominator;
-  var parts = numberWithCorrectDecimals.toString().split(".");
+CCC.filterNumberFunctionPolyfill = (value, decimals) => {
+  const decimalsDenominator = Math.pow(10, decimals);
+  const numberWithCorrectDecimals = Math.round(value * decimalsDenominator) / decimalsDenominator;
+  const parts = numberWithCorrectDecimals.toString().split(".");
   parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   return parts.join(".");
 }
 
-CCC.convertValueToDisplay = function(symbol, value, type, fullNumbers) {
-  var prefix = '';
-  var valueSign = 1;
+CCC.convertValueToDisplay = (symbol, value, type, fullNumbers) => {
+  let prefix = '';
+  let valueSign = 1;
   value = parseFloat(value);
-  var valueAbs = Math.abs(value);
-  var decimalsOnBigNumbers = 2;
-  var decimalsOnNormalNumbers = 2;
-  var decimalsOnSmallNumbers = 4;
+  let valueAbs = Math.abs(value);
+  let decimalsOnBigNumbers = 2;
+  let decimalsOnNormalNumbers = 2;
+  let decimalsOnSmallNumbers = 4;
   if (fullNumbers === true) {
     decimalsOnBigNumbers = 2;
     decimalsOnNormalNumbers = 0;

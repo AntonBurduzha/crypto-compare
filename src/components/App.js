@@ -4,31 +4,33 @@ import { Layout, notification } from 'antd';
 import Footer from './layout/Footer';
 import Sidebar from './layout/Sidebar';
 import CurrenciesView from './currencies/CurrenciesView';
-import MarketBTC from './currency-market';
+import MarketBTC from './currency-market/MarketBTC';
+import MarketETH from './currency-market/MarketETH';
 import { NAV_TABS } from '../constants';
 
 notification.config({ duration: 3 });
 
-const App = ({ tab }) => {
-  let content = null;
+const AppContent = ({ tab }) => {
   switch (tab) {
     case NAV_TABS.LIST:
-      content = <CurrenciesView/>;
-      break;
+      return <CurrenciesView/>;
     case NAV_TABS.MARKET_BTC:
-      content = <MarketBTC/>;
-      break;
+      return <MarketBTC/>;
     case NAV_TABS.MARKET_ETH:
-      content = <MarketBTC/>;
-      break;
+      return <MarketETH/>;
     default:
-      content = <h1>WTF!!!</h1>
+      return <h1>WTF!!!</h1>
   }
+};
+
+const App = ({ tab }) => {
   return (
     <Layout style={{ minHeight: '100vh' }}>
       <Sidebar/>
       <Layout>
-        <Layout.Content>{ content }</Layout.Content>
+        <Layout.Content>
+          <AppContent tab={tab}/>
+        </Layout.Content>
         <Footer/>
       </Layout>
     </Layout>
