@@ -18,6 +18,7 @@ export const SET_NEXT_TAB = 'SET_NEXT_TAB';
 
 export const GET_CURRENT_CC_STATE = 'GET_CURRENT_CC_STATE';
 export const SET_CURRENT_CC_STATE = 'SET_CURRENT_CC_STATE';
+export const RESET_CC_DATA = 'RESET_CC_DATA';
 
 export const NAV_TABS = Object.freeze({
   LIST: 'list',
