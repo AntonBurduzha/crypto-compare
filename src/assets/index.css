@@ -34,3 +34,7 @@ body {
   margin: auto;
   width: 90px;
 }
+
+.cc-socket-wrapper {
+  padding: 20px;
+}

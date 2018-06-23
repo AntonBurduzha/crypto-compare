@@ -2,49 +2,51 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import io from 'socket.io-client';
+import { Row, Col } from 'antd';
 import * as currenciesActions from '../../actions';
 import { CRYPTO_COMPARE_WEB_SOCKET_CHANNEL, CURRENCIES, SIGNATURES } from '../../constants';
+import MarketValues from './MarketValues';
+import { ButtonGroup } from '../shared/ButtonGroup';
 
 class MarketBTC extends Component {
+  state = { isConnected: false };
   socket = io.connect(CRYPTO_COMPARE_WEB_SOCKET_CHANNEL);
   subscription = [SIGNATURES.BTC_F, SIGNATURES.BTC_FV, SIGNATURES.USD_FV];
 
   componentWillUnmount() {
     this.socket.emit('SubRemove', { subs: this.subscription });
+    this.setState({ isConnected: false });
   }
 
   componentDidMount() {
     this.socket.emit('SubAdd', { subs: this.subscription });
+    this.setState({ isConnected: true });
     this.socket.on("m", res => this.props.getCurrentCryptoCurrency(res));
   }
 
-  render() {
-    const { currency } = this.props;
-    const priceColor = currency.FLAGS ? 'green' : 'red';
-    const exchangeColor = currency.PRICE > currency.OPEN24HOUR ? 'green' : 'red';
+  startConnection = () => {
+    this.socket.emit('SubAdd', { subs: this.subscription });
+    this.setState({ isConnected: true });
+  }
 
+  stopConnection = () => {
+    this.socket.emit('SubRemove', { subs: this.subscription });
+    this.setState({ isConnected: false });
+  }
+
+  render() {
     return (
       <div className="main-container">
-        <h2 style={{ color: priceColor }}>
-          { CURRENCIES.BTC } - {CURRENCIES.USD} { currency.PRICE }</h2>
-        <h5>
-          24h Change: { currency.CHANGE24HOUR }
-          <span style={{ color: exchangeColor }}>{ currency.CHANGE24HOURPCT }</span>
-        </h5>
-        <h5>Last Market: { currency.LASTMARKET }</h5>
-        <h5>Trade ID: { currency.LASTTRADEID }</h5>
-        <h5>Open Hour: { currency.OPENHOUR }</h5>
-        <h5>High Hour: { currency.HIGHHOUR }</h5>
-        <h5>Low Hour: { currency.LOWHOUR }</h5>
-        <h5>Open Day: { currency.OPEN24HOUR }</h5>
-        <h5>High Day: { currency.HIGH24HOUR }</h5>
-        <h5>Low Day: { currency.LOW24HOUR }</h5>
-        <h5>Last Trade Volume: { currency.LASTVOLUME }</h5>
-        <h5>Last Trade Volume To: { currency.LASTVOLUMETO }</h5>
-        <h5>24h Volume: { currency.VOLUME24HOUR }</h5>
-        <h5>24h VolumeTo: { currency.VOLUME24HOURTO }</h5>
-        <h5>Total Volume ({ CURRENCIES.BTC }): { currency.FULLVOLUMEFROM }</h5>
-        <h5>Total Volume ({CURRENCIES.USD}): { currency.FULLVOLUMETO }</h5>
+        <Row type="flex" justify="start" align="top">
+          <Col span={8}><MarketValues cc={CURRENCIES.BTC}/></Col>
+          <Col span={12}>
+            <ButtonGroup
+              isConnected={this.state.isConnected}
+              startConnection={this.startConnection}
+              stopConnection={this.stopConnection}
+            />
+          </Col>
+        </Row>
       </div>
     );
   }
