@@ -8,6 +8,4 @@ export const getNextTab = tab => ({ type: types.SET_NEXT_TAB, tab });
 
 export const getCurrentCryptoCurrency = msg => ({ type: types.GET_CURRENT_CC_STATE, msg });
 
-export const resetCCData = ({ type: types.RESET_CC_DATA });
-
-export const resetChartData = ({ type: types.RESET_CHART_DATA });
+export const resetChartData = () => ({ type: types.RESET_CHART_DATA });
