@@ -20,6 +20,9 @@ export const GET_CURRENT_CC_STATE = 'GET_CURRENT_CC_STATE';
 export const SET_CURRENT_CC_STATE = 'SET_CURRENT_CC_STATE';
 export const RESET_CC_DATA = 'RESET_CC_DATA';
 
+export const SET_CHART_DATA = 'SET_CHART_DATA';
+export const RESET_CHART_DATA = 'RESET_CHART_DATA';
+
 export const NAV_TABS = Object.freeze({
   LIST: 'list',
   MARKET_BTC: 'marketBTC',

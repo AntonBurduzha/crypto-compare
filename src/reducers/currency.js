@@ -22,7 +22,8 @@ const initState = {
     VOLUME24HOURTO: "N/A",
     VOLUMEHOUR: "N/A",
     VOLUMEHOURTO: "N/A",
-  }
+  },
+  chartData: []
 };
 
 function currencyReducer(state = initState, action) {
@@ -31,7 +32,13 @@ function currencyReducer(state = initState, action) {
       return { ...state, data: { ...state.data, ...action.state } };
     }
     case constants.RESET_CC_DATA: {
-      return { ...state, data: initState.data }
+      return { ...state, data: initState.data };
+    }
+    case constants.SET_CHART_DATA: {
+      return { ...state, chartData: action.list };
+    }
+    case constants.RESET_CHART_DATA: {
+      return { ...state, chartData: [] };
     }
     default:
       return state;

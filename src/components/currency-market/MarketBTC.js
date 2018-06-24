@@ -6,6 +6,7 @@ import { Row, Col } from 'antd';
 import * as currenciesActions from '../../actions';
 import { CRYPTO_COMPARE_WEB_SOCKET_CHANNEL, CURRENCIES, SIGNATURES } from '../../constants';
 import MarketValues from './MarketValues';
+import PriceLineChart from './PriceLineChart';
 import { ButtonGroup } from '../shared/ButtonGroup';
 
 class MarketBTC extends Component {
@@ -45,6 +46,7 @@ class MarketBTC extends Component {
               startConnection={this.startConnection}
               stopConnection={this.stopConnection}
             />
+            <PriceLineChart/>
           </Col>
         </Row>
       </div>
