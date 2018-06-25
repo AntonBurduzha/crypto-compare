@@ -4,8 +4,10 @@ const initState = {
   fetching: false,
   error: false,
   fullList: [],
+  filteredList: [],
   pageList: [],
   page: 1,
+  searchedKey: ''
 };
 
 function currenciesReducer(state = initState, action) {
@@ -26,6 +28,12 @@ function currenciesReducer(state = initState, action) {
     }
     case constants.SET_NEXT_PAGE: {
       return { ...state, pageList: action.pageList, page: action.index };
+    }
+    case constants.SET_SEARCH_CC_VALUE: {
+      return { ...state, searchedKey: action.value };
+    }
+    case constants.UPDATE_LIST_BY_SEARCH_VALUE: {
+      return { ...state, pageList: action.pageList, filteredList: action.filteredList };
     }
     default:
       return state;

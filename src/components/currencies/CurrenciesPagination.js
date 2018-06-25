@@ -1,32 +1,31 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from'redux';
 import * as currenciesActions from '../../actions';
 import { PAGE_SIZE } from '../../constants';
-import { Row, Col, Pagination } from 'antd';
+import { Pagination } from 'antd';
 
 class CurrenciesPagination extends Component {
   onChangePage = pageNumber => this.props.getNextPage(pageNumber);
 
   render() {
-    const { fullList, page } = this.props.currencies;
+    const { fullList, page, filteredList, searchedKey } = this.props.currencies;
+    const list = searchedKey ? filteredList : fullList;
     return (
-      <Row type="flex" justify="start" style={{margin: '0', padding: '20px 0 10px 20px'}}>
-        { fullList.length &&
-            <Col span={12}>
-              <Pagination
-                total={fullList.length}
-                showTotal={(total, range) => {
-                  return `${range[0]}-${range[1]} of ${total} items`}
-                }
-                pageSize={PAGE_SIZE}
-                defaultCurrent={1}
-                current={page}
-                onChange={this.onChangePage}
-              />
-            </Col>
+      <Fragment>
+        { list.length &&
+            <Pagination
+              total={list.length}
+              showTotal={(total, range) => {
+                return `${range[0]}-${range[1]} of ${total} items`}
+              }
+              pageSize={PAGE_SIZE}
+              defaultCurrent={1}
+              current={page}
+              onChange={this.onChangePage}
+            />
           }
-      </Row>
+      </Fragment>
     );
   }
 }

@@ -1,5 +1,5 @@
 import { all } from 'redux-saga/effects';
-import { fetchCurrenciesRequest, getNextPage } from './currencies.saga';
+import { fetchCurrenciesRequest, getNextPage, updateCurrenciesListBySearchValue } from './currencies.saga';
 import { getCurrentCryptoCurrencyState } from './currency.socket.saga';
 
 export default function* rootSaga() {
@@ -7,5 +7,6 @@ export default function* rootSaga() {
     fetchCurrenciesRequest(),
     getNextPage(),
     getCurrentCryptoCurrencyState(),
+    updateCurrenciesListBySearchValue(),
   ]);
 }

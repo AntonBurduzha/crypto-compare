@@ -21,7 +21,10 @@ export function* fetchCurrenciesRequest() {
 }
 
 function* setNextPage({ index }) {
-  const fullList = yield select(state => state.app.currencies.fullList);
+  const fullList = yield select(state => {
+    const { searchedKey, filteredList, fullList } = state.app.currencies;
+    return searchedKey ? filteredList : fullList;
+  });
   const isLastPage = Math.ceil(fullList.length / constants.PAGE_SIZE) === index;
   let pageList = [];
 
@@ -39,4 +42,19 @@ function* setNextPage({ index }) {
 
 export function* getNextPage() {
   yield takeEvery(constants.GET_NEXT_PAGE, setNextPage);
+}
+
+function* updateCurrenciesList({ value }) {
+  const isValueMatchToListProp = (c, prop) => c[prop].toLowerCase().includes(value.toLowerCase());
+  const fullList = yield select(state => state.app.currencies.fullList);
+
+  const filteredList = fullList
+    .filter(cc => isValueMatchToListProp(cc, 'CoinName') || isValueMatchToListProp(cc, 'Name'));
+  const pageList = filteredList.slice(0, constants.PAGE_SIZE);
+  
+  yield put({ type: constants.UPDATE_LIST_BY_SEARCH_VALUE, filteredList, pageList });
+}
+
+export function* updateCurrenciesListBySearchValue() {
+  yield takeEvery(constants.SET_SEARCH_CC_VALUE, updateCurrenciesList);
 }
