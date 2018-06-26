@@ -38,7 +38,7 @@ const App = ({ tab }) => {
 };
 
 function mapStateToProps(state) {
-  return { tab: state.app.navigation.tab }
+  return { tab: state.app.navigation.get('tab') }
 }
 
 export default connect(mapStateToProps)(App);

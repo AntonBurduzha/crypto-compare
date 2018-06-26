@@ -14,9 +14,10 @@ class CurrenciesView extends Component {
   }
 
   render() {
-    const { fetching, error, pageList } = this.props.currencies;
+    const { currencies } = this.props;
+    //, error, pageList
     return (
-      <Spin tip="Loading..." spinning={fetching}>
+      <Spin tip="Loading..." spinning={currencies.get('fetching')}>
         <div className="main-container">
           <Row type="flex" justify="start" align="middle" style={{ padding: '20px 30px 0px 20px' }}>
             <Col span={16}>
@@ -26,8 +27,8 @@ class CurrenciesView extends Component {
               <CurrenciesSearch/>
             </Col>
           </Row>
-          <CurrenciesList list={pageList} />
-          { error && <ErrorMessage /> }
+          <CurrenciesList list={currencies.get('pageList')} />
+          { currencies.get('error') && <ErrorMessage /> }
         </div>
       </Spin>
     );

@@ -956,14 +956,6 @@ babel-plugin-transform-strict-mode@^6.24.1:
     babel-runtime "^6.22.0"
     babel-types "^6.24.1"
 
-babel-polyfill@^6.2.0:
-  version "6.26.0"
-  resolved "https://registry.yarnpkg.com/babel-polyfill/-/babel-polyfill-6.26.0.tgz#379937abc67d7895970adc621f284cd966cf2153"
-  dependencies:
-    babel-runtime "^6.26.0"
-    core-js "^2.5.0"
-    regenerator-runtime "^0.10.5"
-
 babel-preset-env@1.6.1:
   version "1.6.1"
   resolved "https://registry.yarnpkg.com/babel-preset-env/-/babel-preset-env-1.6.1.tgz#a18b564cc9b9afdf4aae57ae3c1b0d99188e6f48"
@@ -1359,12 +1351,6 @@ builtin-status-codes@^3.0.0:
 bytes@3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/bytes/-/bytes-3.0.0.tgz#d32815404d689699f85a4ea4fa8755dd13a96048"
-
-c3@^0.4.10:
-  version "0.4.23"
-  resolved "https://registry.yarnpkg.com/c3/-/c3-0.4.23.tgz#32ece135d0ac6d124187be5c6935903699643002"
-  dependencies:
-    d3 "~3.5.0"
 
 cache-base@^1.0.1:
   version "1.0.1"
@@ -2062,10 +2048,6 @@ d3-time@1:
   version "1.0.8"
   resolved "https://registry.yarnpkg.com/d3-time/-/d3-time-1.0.8.tgz#dbd2d6007bf416fe67a76d17947b784bffea1e84"
 
-d3@~3.5.0:
-  version "3.5.17"
-  resolved "https://registry.yarnpkg.com/d3/-/d3-3.5.17.tgz#bc46748004378b21a360c9fc7cf5231790762fb8"
-
 d@1:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/d/-/d-1.0.0.tgz#754bb5bfe55451da69a58b94d45f4c5b0462d58f"
@@ -2121,10 +2103,6 @@ deep-extend@^0.6.0:
 deep-is@~0.1.3:
   version "0.1.3"
   resolved "https://registry.yarnpkg.com/deep-is/-/deep-is-0.1.3.tgz#b369d6fb5dbc13eecf524f91b070feedc357cf34"
-
-deepmerge@^0.2.10:
-  version "0.2.10"
-  resolved "https://registry.yarnpkg.com/deepmerge/-/deepmerge-0.2.10.tgz#8906bf9e525a4fbf1b203b2afcb4640249821219"
 
 default-require-extensions@^2.0.0:
   version "2.0.0"
@@ -3038,10 +3016,6 @@ fill-range@^4.0.0:
     repeat-string "^1.6.1"
     to-regex-range "^2.1.0"
 
-filter-react-dom-props@0.0.2:
-  version "0.0.2"
-  resolved "https://registry.yarnpkg.com/filter-react-dom-props/-/filter-react-dom-props-0.0.2.tgz#d5c1e5a89c13534cebe3930a22afa9ae3238813b"
-
 finalhandler@1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/finalhandler/-/finalhandler-1.1.1.tgz#eebf4ed840079c83f4249038c9d703008301b105"
@@ -3615,7 +3589,7 @@ ignore@^3.3.3:
   version "3.3.8"
   resolved "https://registry.yarnpkg.com/ignore/-/ignore-3.3.8.tgz#3f8e9c35d38708a3a7e0e9abb6c73e7ee7707b2b"
 
-immutable@^3.7.4:
+immutable@^3.7.4, immutable@^3.8.2:
   version "3.8.2"
   resolved "https://registry.yarnpkg.com/immutable/-/immutable-3.8.2.tgz#c2439951455bb39913daf281376f1530e104adf3"
 
@@ -6336,15 +6310,6 @@ react-resize-detector@1.1.0:
   dependencies:
     prop-types "^15.5.10"
 
-react-rt-chart@^1.3.0:
-  version "1.3.0"
-  resolved "https://registry.yarnpkg.com/react-rt-chart/-/react-rt-chart-1.3.0.tgz#779e73f2dea4ba285fd708570d2942746a6ca770"
-  dependencies:
-    babel-polyfill "^6.2.0"
-    c3 "^0.4.10"
-    deepmerge "^0.2.10"
-    filter-react-dom-props "0.0.2"
-
 react-scripts@1.1.4:
   version "1.1.4"
   resolved "https://registry.yarnpkg.com/react-scripts/-/react-scripts-1.1.4.tgz#d5c230e707918d6dd2d06f303b10f5222d017c88"
@@ -6553,10 +6518,6 @@ redux@^4.0.0:
 regenerate@^1.2.1:
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/regenerate/-/regenerate-1.4.0.tgz#4a856ec4b56e4077c557589cae85e7a4c8869a11"
-
-regenerator-runtime@^0.10.5:
-  version "0.10.5"
-  resolved "https://registry.yarnpkg.com/regenerator-runtime/-/regenerator-runtime-0.10.5.tgz#336c3efc1220adcedda2c9fab67b5a7955a33658"
 
 regenerator-runtime@^0.11.0:
   version "0.11.1"

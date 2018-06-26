@@ -22,10 +22,10 @@ export function* fetchCurrenciesRequest() {
 
 function* setNextPage({ index }) {
   const fullList = yield select(state => {
-    const { searchedKey, filteredList, fullList } = state.app.currencies;
-    return searchedKey ? filteredList : fullList;
+    const currencies = state.app.currencies;
+    return currencies.get('searchedKey') ? currencies.get('filteredList') : currencies.get('fullList');
   });
-  const isLastPage = Math.ceil(fullList.length / constants.PAGE_SIZE) === index;
+  const isLastPage = Math.ceil(fullList.size / constants.PAGE_SIZE) === index;
   let pageList = [];
 
   if (index === 1) {
@@ -45,13 +45,13 @@ export function* getNextPage() {
 }
 
 function* updateCurrenciesList({ value }) {
-  const isValueMatchToListProp = (c, prop) => c[prop].toLowerCase().includes(value.toLowerCase());
-  const fullList = yield select(state => state.app.currencies.fullList);
+  const isValueMatchToListProp = (c, prop) => c.get(prop).toLowerCase().includes(value.toLowerCase());
+  const fullList = yield select(state => state.app.currencies.get('fullList'));
 
   const filteredList = fullList
     .filter(cc => isValueMatchToListProp(cc, 'CoinName') || isValueMatchToListProp(cc, 'Name'));
   const pageList = filteredList.slice(0, constants.PAGE_SIZE);
-  
+
   yield put({ type: constants.UPDATE_LIST_BY_SEARCH_VALUE, filteredList, pageList });
 }
 

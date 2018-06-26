@@ -9,19 +9,19 @@ class CurrenciesPagination extends Component {
   onChangePage = pageNumber => this.props.getNextPage(pageNumber);
 
   render() {
-    const { fullList, page, filteredList, searchedKey } = this.props.currencies;
-    const list = searchedKey ? filteredList : fullList;
+    const { currencies } = this.props;
+    const list = currencies.get('searchedKey') ? currencies.get('filteredList') : currencies.get('fullList');
     return (
       <Fragment>
-        { list.length &&
+        { list.size &&
             <Pagination
-              total={list.length}
+              total={list.size}
               showTotal={(total, range) => {
                 return `${range[0]}-${range[1]} of ${total} items`}
               }
               pageSize={PAGE_SIZE}
               defaultCurrent={1}
-              current={page}
+              current={currencies.get('page')}
               onChange={this.onChangePage}
             />
           }
