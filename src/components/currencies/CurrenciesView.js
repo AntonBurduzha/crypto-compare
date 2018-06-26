@@ -15,7 +15,6 @@ class CurrenciesView extends Component {
 
   render() {
     const { currencies } = this.props;
-    //, error, pageList
     return (
       <Spin tip="Loading..." spinning={currencies.get('fetching')}>
         <div className="main-container">

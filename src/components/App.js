@@ -1,41 +1,44 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Layout, notification } from 'antd';
+import { asyncComponent } from 'react-async-component';
 import Footer from './layout/Footer';
 import Sidebar from './layout/Sidebar';
-import CurrenciesView from './currencies/CurrenciesView';
-import MarketBTC from './currency-market/MarketBTC';
-import MarketETH from './currency-market/MarketETH';
 import { NAV_TABS } from '../constants';
+
+const AsyncCurrenciesView =  asyncComponent({ resolve: () => import('./currencies/CurrenciesView') });
+const AsyncMarketBTC =  asyncComponent({ resolve: () => import('./currency-market/MarketBTC') });
+const AsyncMarketETH =  asyncComponent({ resolve: () => import('./currency-market/MarketETH') });
 
 notification.config({ duration: 3 });
 
 const AppContent = ({ tab }) => {
   switch (tab) {
     case NAV_TABS.LIST:
-      return <CurrenciesView/>;
+      return <AsyncCurrenciesView/>
     case NAV_TABS.MARKET_BTC:
-      return <MarketBTC/>;
+      return <AsyncMarketBTC/>
     case NAV_TABS.MARKET_ETH:
-      return <MarketETH/>;
+      return <AsyncMarketETH/>
     default:
-      return <h1>WTF!!!</h1>
   }
 };
 
-const App = ({ tab }) => {
-  return (
-    <Layout style={{ minHeight: '100vh' }}>
-      <Sidebar/>
-      <Layout>
-        <Layout.Content>
-          <AppContent tab={tab}/>
-        </Layout.Content>
-        <Footer/>
+class App extends Component {
+  render() {
+    return (
+      <Layout style={{ minHeight: '100vh' }}>
+        <Sidebar/>
+        <Layout>
+          <Layout.Content>
+            <AppContent tab={this.props.tab}/>
+          </Layout.Content>
+          <Footer/>
+        </Layout>
       </Layout>
-    </Layout>
-  );
-};
+    );
+  }
+}
 
 function mapStateToProps(state) {
   return { tab: state.app.navigation.get('tab') }
