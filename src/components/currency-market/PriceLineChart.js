@@ -10,11 +10,12 @@ class PriceLineChart extends PureComponent {
   }
 
   render() {
-    const { chartData } = this.props;
+    const { currency } = this.props;
+    const chartData = currency.get('chartData');
     return (
       <Fragment>
-        { chartData.length === 10 &&
-            <LineChart width={600} height={300} data={chartData}
+        { chartData.size === 10 &&
+            <LineChart width={600} height={300} data={chartData.toJS()}
                 margin={{top: 5, right: 30, left: 20, bottom: 5}}>
               <XAxis dataKey="TIMESTAMP"/>
               <YAxis
@@ -32,7 +33,7 @@ class PriceLineChart extends PureComponent {
 }
 
 function mapStateToProps(state) {
-  return { chartData: state.app.currency.chartData };
+  return { currency: state.app.currency };
 }
 
 function mapDispatchToProps(dispatch) {

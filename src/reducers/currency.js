@@ -1,6 +1,7 @@
 import * as constants from '../constants';
+import Immutable from 'immutable';
 
-const initState = {
+const initState = Immutable.fromJS({
   data: {
     CHANGE24HOUR: "N/A",
     CHANGE24HOURPCT: "N/A",
@@ -24,21 +25,25 @@ const initState = {
     VOLUMEHOURTO: "N/A",
   },
   chartData: []
-};
+});
 
 function currencyReducer(state = initState, action) {
   switch (action.type) {
     case constants.SET_CURRENT_CC_STATE: {
-      return { ...state, data: { ...state.data, ...action.state } };
+      return state
+        .set('data', state.get('data').merge(Immutable.fromJS(action.state)));
     }
     case constants.RESET_CC_DATA: {
-      return { ...state, data: initState.data };
+      return state
+        .set('data', initState.get('data'));
     }
     case constants.SET_CHART_DATA: {
-      return { ...state, chartData: action.list };
+      return state
+        .set('chartData', action.list);
     }
     case constants.RESET_CHART_DATA: {
-      return { ...state, chartData: [] };
+      return state
+        .set('chartData', Immutable.List([]));
     }
     default:
       return state;

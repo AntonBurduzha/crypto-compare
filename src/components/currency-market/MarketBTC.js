@@ -54,12 +54,8 @@ class MarketBTC extends Component {
   }
 }
 
-function mapStateToProps(state) {
-  return { currency: state.app.currency.data };
-}
-
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({ ...currenciesActions }, dispatch);
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(MarketBTC);
+export default connect(null, mapDispatchToProps)(MarketBTC);
