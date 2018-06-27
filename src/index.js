@@ -1,3 +1,4 @@
+// @flow
 import './assets/index.css';
 import 'antd/dist/antd.css';
 
@@ -10,4 +11,8 @@ import App from './components/App';
 
 const rootElement = document.getElementById('root');
 
-ReactDOM.render(<Provider store={store}><App /></Provider>, rootElement);
+if (rootElement instanceof HTMLElement) {
+  ReactDOM.render(<Provider store={store}><App /></Provider>, rootElement);
+} else {
+  throw new Error('Seems like there is problem with rootElement, check index.html file in public dir.');
+}
