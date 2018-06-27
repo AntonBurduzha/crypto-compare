@@ -41,7 +41,7 @@ class App extends Component {
 }
 
 function mapStateToProps(state) {
-  return { tab: state.app.navigation.get('tab') }
+  return { tab: state.app.navigation.tab }
 }
 
 export default connect(mapStateToProps)(App);

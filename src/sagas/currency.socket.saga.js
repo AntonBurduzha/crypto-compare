@@ -1,6 +1,5 @@
 import { call, put, takeEvery, select } from 'redux-saga/effects';
 import moment from 'moment';
-import Immutable from 'immutable';
 import * as constants from '../constants';
 import { CCC } from '../utils/ccc-streamer-utilities';
 import * as UnpackUtils from '../utils/unpack.cc.socket';
@@ -19,20 +18,16 @@ function* setCurrentCryptoCurrencyState({ msg }) {
 }
 
 function* updateChartData() {
-  const currency = yield select(state => state.app.currency);
-  const chartData = currency.get('chartData');
-  const PRICE = parseFloat(currency.getIn(['data','PRICE']).slice(2).replace(',', ''));
-  const TIMESTAMP = currency.getIn(['data','TIMESTAMP']);
-
-  if (currency.get('chartData').size < 10) {
+  const { data: { PRICE, TIMESTAMP }, chartData } = yield select(state => state.app.currency);
+  if (chartData.length < 10) {
     yield put({
       type: constants.SET_CHART_DATA,
-      list: Immutable.List(chartData.push(Immutable.Map({ PRICE, TIMESTAMP })))
+      list: [...chartData, ...[{ PRICE: parseFloat(PRICE.slice(2).replace(',', '')), TIMESTAMP}]]
     });
   } else {
     yield put({
       type: constants.SET_CHART_DATA,
-      list: Immutable.List(chartData.slice(1).push(Immutable.Map({ PRICE, TIMESTAMP })))
+      list: [...chartData.slice(1), ...[{ PRICE: parseFloat(PRICE.slice(2).replace(',', '')), TIMESTAMP}]]
     });
   }
 }

@@ -35,7 +35,7 @@ class Sidebar extends Component {
 }
 
 function mapStateToProps(state) {
-	return { tab: state.app.navigation.get('tab') }
+	return { tab: state.app.navigation.tab }
 }
 
 function mapDispatchToProps(dispatch) {
