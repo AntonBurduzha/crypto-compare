@@ -1,16 +1,20 @@
+// @flow
 import { call, put, takeEvery, select } from 'redux-saga/effects';
 import { notification } from 'antd';
+import type { Saga } from 'redux-saga';
 import * as constants from '../constants';
 import * as actions from '../actions';
 import Api from '../api';
+import type { Currency, Currencies } from '../types/entities';
+import { values } from '../utils/flow.utils';
 
-function* fetchCurrencies() {
+function* fetchCurrencies(): Saga<void> {
   try {
-    const { Data } = yield call(Api.getCryptoCurrenciesList);
-    const list = Object.values(Data);
+    const { Data } : { Data: Currencies } = yield call(Api.getCryptoCurrenciesList);
+    const list: Array<Currency> = values(Data);
     yield put(actions.successCryptoCurrencies(list));
   } catch (e) {
-    yield put(actions.successCryptoCurrencies());
+    yield put(actions.failedCryptoCurrencies());
     notification.error({
       message: 'Unexpected result!',
       description: 'Something went wrong. Try later or go away from this app.',
@@ -18,11 +22,11 @@ function* fetchCurrencies() {
   }
 }
 
-export function* fetchCurrenciesRequest() {
+export function* fetchCurrenciesRequest(): Saga<void> {
   yield takeEvery(constants.FETCH_CRYPTO_CURRENCIES, fetchCurrencies);
 }
 
-function* setNextPage({ index }) {
+function* setNextPage({ index }): Saga<void> {
   const fullList = yield select(state => {
     const { searchedKey, filteredList, fullList } = state.app.currencies;
     return searchedKey ? filteredList : fullList;
@@ -42,11 +46,11 @@ function* setNextPage({ index }) {
   yield put(actions.setNextPage(pageList, index));
 }
 
-export function* getNextPage() {
+export function* getNextPage(): Saga<void> {
   yield takeEvery(constants.GET_NEXT_PAGE, setNextPage);
 }
 
-function* updateCurrenciesList({ value }) {
+function* updateCurrenciesList({ value }): Saga<void> {
   const isValueMatchToListProp = (c, prop) => c[prop].toLowerCase().includes(value.toLowerCase());
   const fullList = yield select(state => state.app.currencies.fullList);
 
@@ -57,6 +61,6 @@ function* updateCurrenciesList({ value }) {
   yield put(actions.updateListByValue(filteredList, pageList));
 }
 
-export function* updateCurrenciesListBySearchValue() {
+export function* updateCurrenciesListBySearchValue(): Saga<void> {
   yield takeEvery(constants.SET_SEARCH_CC_VALUE, updateCurrenciesList);
 }

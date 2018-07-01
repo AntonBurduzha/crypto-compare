@@ -18,30 +18,35 @@ export type Currency = {
   Url: string,
 };
 
+export type Currencies = {
+  [key: string]: Currency,
+};
+
 export type CurrencySocketState = {
-    CHANGE24HOUR: string,
-    CHANGE24HOURPCT: string,
-    FLAGS: string,
-    FULLVOLUMEFROM: string,
-    FULLVOLUMETO: string,
-    HIGH24HOUR: string,
-    HIGHHOUR: string,
-    LASTMARKET: string,
-    LASTTRADEID: string,
-    LASTVOLUME: string,
-    LASTVOLUMETO: string,
-    LOW24HOUR: string,
-    LOWHOUR: string,
-    OPEN24HOUR: string,
-    OPENHOUR: string,
+    CHANGE24HOUR?: string,
+    CHANGE24HOURPCT?: string,
+    FLAGS?: string,
+    FULLVOLUMEFROM?: string,
+    FULLVOLUMETO?: string,
+    HIGH24HOUR?: string,
+    HIGHHOUR?: string,
+    LASTMARKET?: string,
+    LASTTRADEID?: string,
+    LASTVOLUME?: string,
+    LASTVOLUMETO?: string,
+    LOW24HOUR?: string,
+    LOWHOUR?: string,
+    OPEN24HOUR?: string,
+    OPENHOUR?: string,
     PRICE: string,
-    VOLUME24HOUR: string,
-    VOLUME24HOURTO: string,
-    VOLUMEHOUR: string,
-    VOLUMEHOURTO: string,
+    VOLUME24HOUR?: string,
+    VOLUME24HOURTO?: string,
+    VOLUMEHOUR?: string,
+    VOLUMEHOURTO?: string,
+    TIMESTAMP: string,
   };
 
   export type CurrencyChartItem = {
-    PRICE: string,
+    PRICE: number,
     TIMESTAMP: string,
   };
