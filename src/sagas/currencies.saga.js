@@ -1,14 +1,16 @@
 import { call, put, takeEvery, select } from 'redux-saga/effects';
 import { notification } from 'antd';
 import * as constants from '../constants';
+import * as actions from '../actions';
 import Api from '../api';
 
 function* fetchCurrencies() {
   try {
-    const { Data: list } = yield call(Api.getCryptoCurrenciesList);
-    yield put({ type: constants.SUCCESS_CRYPTO_CURRENCIES, list: Object.values(list) });
+    const { Data } = yield call(Api.getCryptoCurrenciesList);
+    const list = Object.values(Data);
+    yield put(actions.successCryptoCurrencies(list));
   } catch (e) {
-    yield put({ type: constants.FAILED_CRYPTO_CURRENCIES });
+    yield put(actions.successCryptoCurrencies());
     notification.error({
       message: 'Unexpected result!',
       description: 'Something went wrong. Try later or go away from this app.',
@@ -37,7 +39,7 @@ function* setNextPage({ index }) {
     const startIndex = endIndex - constants.PAGE_SIZE;
     pageList = fullList.slice(startIndex, endIndex);
   }
-  yield put({ type: constants.SET_NEXT_PAGE, pageList, index });
+  yield put(actions.setNextPage(pageList, index));
 }
 
 export function* getNextPage() {
@@ -52,7 +54,7 @@ function* updateCurrenciesList({ value }) {
     .filter(cc => isValueMatchToListProp(cc, 'CoinName') || isValueMatchToListProp(cc, 'Name'));
   const pageList = filteredList.slice(0, constants.PAGE_SIZE);
 
-  yield put({ type: constants.UPDATE_LIST_BY_SEARCH_VALUE, filteredList, pageList });
+  yield put(actions.updateListByValue(filteredList, pageList));
 }
 
 export function* updateCurrenciesListBySearchValue() {

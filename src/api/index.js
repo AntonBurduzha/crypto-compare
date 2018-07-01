@@ -1,3 +1,4 @@
+// @flow
 import axios from 'axios';
 import { CRYPRO_COMPARE_NEW_API } from '../constants';
 

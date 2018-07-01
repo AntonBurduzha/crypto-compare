@@ -1,3 +1,4 @@
+// @flow
 import { combineReducers } from 'redux';
 import currenciesReducer from './currencies';
 import currencyReducer from './currency';
