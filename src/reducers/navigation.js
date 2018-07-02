@@ -1,12 +1,16 @@
-import * as constants from '../constants';
+// @flow
+import type { SetNextTab, GetNextPage } from '../types/actions';
+import type { NavState } from '../types/reducers';
 
-const initState = {
+const initState: NavState = {
   tab: 'list',
 };
 
-function navigationReducer(state = initState, action) {
+type Action = GetNextPage | SetNextTab;
+
+function navigationReducer(state: NavState = initState, action: Action): NavState {
   switch (action.type) {
-    case constants.SET_NEXT_TAB: {
+    case 'SET_NEXT_TAB': {
       return { ...state, tab: action.tab };
     }
     default:

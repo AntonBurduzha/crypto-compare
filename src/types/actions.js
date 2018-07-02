@@ -1,30 +1,31 @@
 // @flow
-import * as types from '../constants';
 import type { Currency, CurrencyChartItem, CurrencySocketState } from './entities';
 
-export type FetchCryptoCurrencies = { type: string };
+export type FetchCryptoCurrencies = { type: 'FETCH_CRYPTO_CURRENCIES' };
 
-export type SuccessCryptoCurrencies = { type: string, list: Array<Currency> };
+export type SuccessCryptoCurrencies = { type: 'SUCCESS_CRYPTO_CURRENCIES', list: Array<Currency> };
 
-export type FailedCryptoCurrencies = { type: string };
+export type FailedCryptoCurrencies = { type: 'FAILED_CRYPTO_CURRENCIES' };
 
-export type GetNextPage = { type: string, index: number };
+export type GetNextPage = { type: 'GET_NEXT_PAGE', index: number };
 
-export type SetNextPage = { type: string, pageList: Array<Currency>, index: number };
+export type SetNextPage = { type: 'SET_NEXT_PAGE', pageList: Array<Currency>, index: number };
 
-export type UpdateListByValue = { type: string, filteredList: Array<Currency>, pageList: Array<Currency> };
+export type UpdateListByValue = { type: 'UPDATE_LIST_BY_SEARCH_VALUE', filteredList: Array<Currency>, pageList: Array<Currency> };
 
-export type GetNextTab = { type: string, tab: string };
+export type SetNextTab = { type: 'SET_NEXT_TAB', tab: string };
 
-export type GetCurrentCryptoCurrency = { type: string, msg: string };
+export type GetCurrentCryptoCurrency = { type: 'GET_CURRENT_CC_STATE', msg: string };
 
-export type SetCurrentCryptoCurrency = { type: string, state: CurrencySocketState };
+export type SetCurrentCryptoCurrency = { type: 'SET_CURRENT_CC_STATE', state: CurrencySocketState };
 
-export type SetChartData = { type: string, list: Array<CurrencyChartItem> };
+export type SetChartData = { type: 'SET_CHART_DATA', list: Array<CurrencyChartItem> };
 
-export type ResetChartData = { type: string };
+export type ResetChartData = { type: 'RESET_CHART_DATA' };
 
-export type SearchCryptoCurrencies = { type: string, value: string };
+export type ResetCCData = { type: 'RESET_CC_DATA' };
+
+export type SearchCryptoCurrencies = { type: 'SET_SEARCH_CC_VALUE', value: string };
 
 export type Action = (
   FetchCryptoCurrencies |
@@ -33,10 +34,11 @@ export type Action = (
   GetNextPage |
   SetNextPage |
   UpdateListByValue |
-  GetNextTab |
+  SetNextTab |
   GetCurrentCryptoCurrency |
   SetCurrentCryptoCurrency |
   SetChartData |
   ResetChartData |
+  ResetCCData |
   SearchCryptoCurrencies
 );

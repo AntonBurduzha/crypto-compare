@@ -2,10 +2,11 @@
 import { call, put, takeEvery, select } from 'redux-saga/effects';
 import { notification } from 'antd';
 import type { Saga } from 'redux-saga';
-import * as constants from '../constants';
+import { PAGE_SIZE } from '../constants';
 import * as actions from '../actions';
 import Api from '../api';
 import type { Currency, Currencies } from '../types/entities';
+import type { StoreState } from '../types/reducers';
 import { values } from '../utils/flow.utils';
 
 function* fetchCurrencies(): Saga<void> {
@@ -23,44 +24,55 @@ function* fetchCurrencies(): Saga<void> {
 }
 
 export function* fetchCurrenciesRequest(): Saga<void> {
-  yield takeEvery(constants.FETCH_CRYPTO_CURRENCIES, fetchCurrencies);
+  yield takeEvery('FETCH_CRYPTO_CURRENCIES', fetchCurrencies);
 }
 
-function* setNextPage({ index }): Saga<void> {
-  const fullList = yield select(state => {
-    const { searchedKey, filteredList, fullList } = state.app.currencies;
+function* setNextPage({ index }: { index: number }): Saga<void> {
+  const fullList: Array<Currency> = yield select((state: StoreState): Array<Currency> => {
+    const {
+      searchedKey,
+      filteredList,
+      fullList
+    } : {
+      +searchedKey: string,
+      +filteredList: Array<Currency>,
+      +fullList: Array<Currency>
+    } = state.app.currencies;
     return searchedKey ? filteredList : fullList;
   });
-  const isLastPage = Math.ceil(fullList.length / constants.PAGE_SIZE) === index;
-  let pageList = [];
+  const isLastPage: boolean = Math.ceil(fullList.length / PAGE_SIZE) === index;
+  let pageList: Array<Currency> = [];
 
   if (index === 1) {
-    pageList = fullList.slice(0, constants.PAGE_SIZE);
+    pageList = fullList.slice(0, PAGE_SIZE);
   } else if (isLastPage) {
-    pageList = fullList.slice(((index * constants.PAGE_SIZE) - constants.PAGE_SIZE));
+    pageList = fullList.slice(((index * PAGE_SIZE) - PAGE_SIZE));
   } else {
-    const endIndex = index * constants.PAGE_SIZE;
-    const startIndex = endIndex - constants.PAGE_SIZE;
+    const endIndex: number = index * PAGE_SIZE;
+    const startIndex: number = endIndex - PAGE_SIZE;
     pageList = fullList.slice(startIndex, endIndex);
   }
   yield put(actions.setNextPage(pageList, index));
 }
 
 export function* getNextPage(): Saga<void> {
-  yield takeEvery(constants.GET_NEXT_PAGE, setNextPage);
+  yield takeEvery('GET_NEXT_PAGE', setNextPage);
 }
 
-function* updateCurrenciesList({ value }): Saga<void> {
-  const isValueMatchToListProp = (c, prop) => c[prop].toLowerCase().includes(value.toLowerCase());
-  const fullList = yield select(state => state.app.currencies.fullList);
+function* updateCurrenciesList({ value }: { value: string }): Saga<void> {
+  const isValueMatchToListProp = (c: Currency, prop: string): boolean => {
+    return c[prop].toLowerCase().includes(value.toLowerCase());
+  }
+  const fullList: Array<Currency> = yield select((state: StoreState): Array<Currency> => state.app.currencies.fullList);
 
-  const filteredList = fullList
-    .filter(cc => isValueMatchToListProp(cc, 'CoinName') || isValueMatchToListProp(cc, 'Name'));
-  const pageList = filteredList.slice(0, constants.PAGE_SIZE);
+  const filteredList: Array<Currency> = fullList.filter((cc: Currency): boolean => {
+      return isValueMatchToListProp(cc, 'CoinName') || isValueMatchToListProp(cc, 'Name');
+    });
+  const pageList: Array<Currency> = filteredList.slice(0, PAGE_SIZE);
 
   yield put(actions.updateListByValue(filteredList, pageList));
 }
 
 export function* updateCurrenciesListBySearchValue(): Saga<void> {
-  yield takeEvery(constants.SET_SEARCH_CC_VALUE, updateCurrenciesList);
+  yield takeEvery('SET_SEARCH_CC_VALUE', updateCurrenciesList);
 }

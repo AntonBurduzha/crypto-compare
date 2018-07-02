@@ -2,11 +2,11 @@
 import { call, put, takeEvery, select } from 'redux-saga/effects';
 import type { Saga } from 'redux-saga';
 import moment from 'moment';
-import * as constants from '../constants';
 import * as actions from '../actions';
 import { CCC } from '../utils/ccc-streamer-utilities';
 import * as UnpackUtils from '../utils/unpack.cc.socket';
 import type { CurrencySocketState, CurrencyChartItem } from '../types/entities';
+import type { StoreState } from '../types/reducers';
 
 function* setCurrentCryptoCurrencyState({ msg }: { msg: string }): Saga<void> {
   const messageType: string = msg.substring(0, msg.indexOf("~"));
@@ -22,8 +22,13 @@ function* setCurrentCryptoCurrencyState({ msg }: { msg: string }): Saga<void> {
 }
 
 function* updateChartData(): Saga<void> {
-  const { data, chartData } : { data: CurrencySocketState, chartData: Array<CurrencyChartItem> }
-    = yield select(state => state.app.currency);
+  const {
+    data,
+    chartData
+  } : {
+    data: CurrencySocketState,
+    chartData: Array<CurrencyChartItem>
+  } = yield select((state: StoreState): mixed => state.app.currency);
 
   if (chartData.length < 10) {
     const list: Array<CurrencyChartItem> = [
@@ -41,5 +46,5 @@ function* updateChartData(): Saga<void> {
 }
 
 export function* getCurrentCryptoCurrencyState(): Saga<void> {
-  yield takeEvery(constants.GET_CURRENT_CC_STATE, setCurrentCryptoCurrencyState);
+  yield takeEvery('GET_CURRENT_CC_STATE', setCurrentCryptoCurrencyState);
 }

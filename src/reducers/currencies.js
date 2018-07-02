@@ -1,6 +1,9 @@
-import * as constants from '../constants';
+// @flow
+import { PAGE_SIZE } from '../constants';
+import type { Action } from '../types/actions';
+import type { CurrenciesState } from '../types/reducers';
 
-const initState = {
+const initState: CurrenciesState = {
   fetching: false,
   error: false,
   fullList: [],
@@ -10,29 +13,29 @@ const initState = {
   searchedKey: ''
 };
 
-function currenciesReducer(state = initState, action) {
+function currenciesReducer(state: CurrenciesState = initState, action: Action): CurrenciesState {
   switch (action.type) {
-    case constants.FETCH_CRYPTO_CURRENCIES: {
+    case 'FETCH_CRYPTO_CURRENCIES': {
       return { ...state, fetching: true, error: false };
     }
-    case constants.SUCCESS_CRYPTO_CURRENCIES: {
+    case 'SUCCESS_CRYPTO_CURRENCIES': {
       return {
         ...state,
         fetching: false,
         fullList: action.list,
-        pageList: action.list.slice(0, constants.PAGE_SIZE),
+        pageList: action.list.slice(0, PAGE_SIZE),
       };
     }
-    case constants.FAILED_CRYPTO_CURRENCIES: {
+    case 'FAILED_CRYPTO_CURRENCIES': {
       return { ...state, fetching: false, error: true };
     }
-    case constants.SET_NEXT_PAGE: {
+    case 'SET_NEXT_PAGE': {
       return { ...state, pageList: action.pageList, page: action.index };
     }
-    case constants.SET_SEARCH_CC_VALUE: {
+    case 'SET_SEARCH_CC_VALUE': {
       return { ...state, searchedKey: action.value };
     }
-    case constants.UPDATE_LIST_BY_SEARCH_VALUE: {
+    case 'UPDATE_LIST_BY_SEARCH_VALUE': {
       return { ...state, pageList: action.pageList, filteredList: action.filteredList };
     }
     default:
