@@ -5,7 +5,6 @@ import { Layout, notification } from 'antd';
 import Footer from './layout/Footer';
 import Sidebar from './layout/Sidebar';
 import AppContent from './shared/AppContent';
-import { NAV_TABS } from '../constants';
 import type { StoreState } from '../types/reducers';
 
 notification.config({ duration: 3 });

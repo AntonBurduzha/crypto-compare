@@ -1,7 +1,8 @@
 {
     "[javascript]": {
         "editor.detecetIndentation": false,
-        "editor.tabSize": 2
+        "editor.tabSize": 2,
+        "editor.formatOnSave": true,
     },
     "flow.runOnEdit": true
 }

@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import { Icon } from 'antd';
 import { CURRENCIES } from '../../constants';
 import { parsePrice } from '../../utils/flow.utils';
-import type { Action } from '../../types/actions';
 import type { StoreState } from '../../types/reducers';
 import type { CurrencySocketState } from '../../types/entities';
 
@@ -15,7 +14,7 @@ type Props = StateProps & { cc: string };
 class MarketValues extends React.PureComponent<Props> {
   render() {
     const { currency, cc } = this.props;
-    const priceColor = parseInt(currency.FLAGS) ? 'green' : 'red';
+    const priceColor = parseInt(currency.FLAGS, 10) ? 'green' : 'red';
     const arrow = currency.FLAGS ? <Icon type="arrow-up" /> : <Icon type="arrow-down" />;
     const exchangeColor = parsePrice(currency.PRICE) > parsePrice(currency.OPEN24HOUR) ? 'green' : 'red';
 
