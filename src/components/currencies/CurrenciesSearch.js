@@ -1,11 +1,15 @@
-import React, { Component } from 'react';
+// @flow
+import * as React from 'react';
 import { Input } from 'antd';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as currenciesActions from '../../actions';
+import type { Action } from '../../types/actions';
 
-class CurrenciesSearch extends Component {
-  onSearch = value => this.props.searchCryptoCurrencies(value);
+type DispatchProps = { searchCryptoCurrencies: (string) => void };
+
+class CurrenciesSearch extends React.Component<DispatchProps> {
+  onSearch = (value: string): void => this.props.searchCryptoCurrencies(value);
 
   render() {
     return (
@@ -19,7 +23,7 @@ class CurrenciesSearch extends Component {
   }
 }
 
-function mapDispatchToProps(dispatch) {
+function mapDispatchToProps(dispatch: Action => void): DispatchProps {
   return bindActionCreators({ ...currenciesActions }, dispatch);
 }
 

@@ -1,15 +1,23 @@
-import React, { PureComponent } from 'react';
+// @flow
+import * as React from 'react';
 import { connect } from 'react-redux';
 import { Icon } from 'antd';
 import { CURRENCIES } from '../../constants';
+import { parsePrice } from '../../utils/flow.utils';
+import type { Action } from '../../types/actions';
+import type { StoreState } from '../../types/reducers';
+import type { CurrencySocketState } from '../../types/entities';
 
+type StateProps = { currency: CurrencySocketState };
 
-class MarketValues extends PureComponent {
+type Props = StateProps & { cc: string };
+
+class MarketValues extends React.PureComponent<Props> {
   render() {
     const { currency, cc } = this.props;
-    const priceColor = currency.FLAGS ? 'green' : 'red';
+    const priceColor = parseInt(currency.FLAGS) ? 'green' : 'red';
     const arrow = currency.FLAGS ? <Icon type="arrow-up" /> : <Icon type="arrow-down" />;
-    const exchangeColor = currency.PRICE > currency.OPEN24HOUR ? 'green' : 'red';
+    const exchangeColor = parsePrice(currency.PRICE) > parsePrice(currency.OPEN24HOUR) ? 'green' : 'red';
 
     return (
       <div className="cc-socket-wrapper">
@@ -40,7 +48,7 @@ class MarketValues extends PureComponent {
   }
 }
 
-function mapStateToProps(state) {
+function mapStateToProps(state: StoreState): StateProps {
   return { currency: state.app.currency.data };
 }
 

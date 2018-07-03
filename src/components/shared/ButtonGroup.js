@@ -1,15 +1,23 @@
+// @flow
 import React from 'react';
 import { Button } from 'antd';
+import type { Element } from 'react';
 
-export const ButtonGroup = ({ startConnection, stopConnection, isConnected }) => {
+type Props = {
+  startConnection: () => void,
+  stopConnection: () => void,
+  isConnected: boolean
+};
+
+export const ButtonGroup = (props: Props): Element<any> => {
   return (
     <div className="cc-socket-wrapper">
       <Button
         type="primary"
         size="large"
         style={{ width: '120px', height: '40px', marginRight: '20px' }}
-        onClick={startConnection}
-        disabled={isConnected}
+        onClick={props.startConnection}
+        disabled={props.isConnected}
       >
         Start
       </Button>
@@ -17,8 +25,8 @@ export const ButtonGroup = ({ startConnection, stopConnection, isConnected }) =>
         type="danger"
         size="large"
         style={{ width: '120px', height: '40px' }}
-        onClick={stopConnection}
-        disabled={!isConnected}
+        onClick={props.stopConnection}
+        disabled={!props.isConnected}
       >
         Stop
       </Button>

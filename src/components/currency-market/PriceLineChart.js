@@ -1,10 +1,20 @@
-import React, { PureComponent, Fragment } from 'react';
+// @flow
+import * as React from 'react';
 import { connect } from 'react-redux';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
 import { bindActionCreators } from 'redux';
 import * as currenciesActions from '../../actions';
+import type { Action } from '../../types/actions';
+import type { StoreState } from '../../types/reducers';
+import type { CurrencyChartItem } from '../../types/entities';
 
-class PriceLineChart extends PureComponent {
+type StateProps = { chartData: Array<CurrencyChartItem> };
+
+type DispatchProps = { resetChartData: () => void };
+
+type Props = StateProps & DispatchProps;
+
+class PriceLineChart extends React.Component<Props> {
   componentWillUnmount() {
     this.props.resetChartData();
   }
@@ -12,7 +22,7 @@ class PriceLineChart extends PureComponent {
   render() {
     const { chartData } = this.props;
     return (
-      <Fragment>
+      <React.Fragment>
         { chartData.length === 10 &&
             <LineChart width={600} height={300} data={chartData}
                 margin={{top: 5, right: 30, left: 20, bottom: 5}}>
@@ -26,16 +36,16 @@ class PriceLineChart extends PureComponent {
               <Line type="monotone" dataKey="PRICE" stroke="#8884d8" activeDot={{r: 8}}/>
             </LineChart>
         }
-      </Fragment>
+      </React.Fragment>
     );
   }
 }
 
-function mapStateToProps(state) {
+function mapStateToProps(state: StoreState): StateProps {
   return { chartData: state.app.currency.chartData };
 }
 
-function mapDispatchToProps(dispatch) {
+function mapDispatchToProps(dispatch: Action => void): DispatchProps {
   return bindActionCreators({ ...currenciesActions }, dispatch);
 }
 

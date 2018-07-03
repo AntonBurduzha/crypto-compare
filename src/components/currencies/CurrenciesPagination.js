@@ -1,18 +1,28 @@
-import React, { Component, Fragment } from 'react';
+// @flow
+import * as React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from'redux';
 import * as currenciesActions from '../../actions';
 import { PAGE_SIZE } from '../../constants';
 import { Pagination } from 'antd';
+import type { Action } from '../../types/actions';
+import type { StoreState } from '../../types/reducers';
+import type { Currency } from '../../types/entities';
 
-class CurrenciesPagination extends Component {
-  onChangePage = pageNumber => this.props.getNextPage(pageNumber);
+type StateProps = { searchedKey: string, filteredList: Array<Currency>, fullList: Array<Currency>, page: number };
+
+type DispatchProps = { getNextPage: (number) => void };
+
+type Props = StateProps & DispatchProps;
+
+class CurrenciesPagination extends React.Component<Props> {
+  onChangePage = (pageNumber: number): void => this.props.getNextPage(pageNumber);
 
   render() {
-    const { searchedKey, filteredList, fullList, page } = this.props.currencies;
+    const { searchedKey, filteredList, fullList, page } = this.props;
     const list = searchedKey ? filteredList : fullList;
     return (
-      <Fragment>
+      <React.Fragment>
         { list.length &&
             <Pagination
               total={list.length}
@@ -25,16 +35,21 @@ class CurrenciesPagination extends Component {
               onChange={this.onChangePage}
             />
           }
-      </Fragment>
+      </React.Fragment>
     );
   }
 }
 
-function mapStateToProps(state) {
-  return { currencies: state.app.currencies };
+function mapStateToProps(state: StoreState): StateProps {
+  return {
+    searchedKey: state.app.currencies.searchedKey,
+    filteredList: state.app.currencies.filteredList,
+    fullList: state.app.currencies.fullList,
+    page: state.app.currencies.page
+  };
 }
 
-function mapDispatchToProps(dispatch) {
+function mapDispatchToProps(dispatch: Action => void): DispatchProps {
   return bindActionCreators({ ...currenciesActions }, dispatch);
 }
 

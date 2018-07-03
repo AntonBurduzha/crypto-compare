@@ -1,10 +1,17 @@
-import React from 'react';
+// @flow
+import * as React from 'react';
 import { Row, Col, Card } from 'antd';
 import { CRYPRO_COMPARE_OLD_API } from '../../constants';
+import type { Currency } from '../../types/entities';
+import type { Element } from 'react';
 
-const CurrenciesList = ({ list }) =>
+type Props = {
+  list: Array<Currency>
+};
+
+const CurrenciesList = (props: Props): Element<any> =>
   <Row type="flex" justify="start" gutter={16} style={{margin: '0', padding: '0 20px' }}>
-    { list.map(item => {
+    { props.list.map((item: Currency): Element<any> => {
         return (
           <Col span={3} key={item.Id} style={{ margin: '10px 0', padding: '0' }}>
             <Card

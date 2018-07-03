@@ -1,4 +1,5 @@
-import React, { Component } from 'react';
+// @flow
+import * as React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Spin, Row, Col } from 'antd';
@@ -7,14 +8,23 @@ import { ErrorMessage } from '../shared/ErrorMessage';
 import CurrenciesPagination from './CurrenciesPagination';
 import CurrenciesList from './CurrenciesList';
 import CurrenciesSearch from './CurrenciesSearch';
+import type { Action } from '../../types/actions';
+import type { StoreState } from '../../types/reducers';
+import type { Currency } from '../../types/entities';
 
-class CurrenciesView extends Component {
+type StateProps = { fetching: boolean, error: boolean, pageList: Array<Currency> };
+
+type DispatchProps = { fetchCryptoCurrencies: () => void };
+
+type Props = StateProps & DispatchProps;
+
+class CurrenciesView extends React.Component<Props> {
   componentDidMount() {
     this.props.fetchCryptoCurrencies();
   }
 
   render() {
-    const { fetching, error, pageList } = this.props.currencies;
+    const { fetching, error, pageList } = this.props;
     return (
       <Spin tip="Loading..." spinning={fetching}>
         <div className="main-container">
@@ -34,11 +44,15 @@ class CurrenciesView extends Component {
   }
 }
 
-function mapStateToProps(state) {
-  return { currencies: state.app.currencies };
+function mapStateToProps(state: StoreState): StateProps {
+  return {
+    fetching: state.app.currencies.fetching,
+    error: state.app.currencies.error,
+    pageList: state.app.currencies.pageList
+  };
 }
 
-function mapDispatchToProps(dispatch) {
+function mapDispatchToProps(dispatch: Action => void): DispatchProps {
   return bindActionCreators({ ...currenciesActions }, dispatch);
 }
 

@@ -1,4 +1,5 @@
-import React, { Component } from 'react';
+// @flow
+import * as React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import io from 'socket.io-client';
@@ -8,10 +9,15 @@ import { CRYPTO_COMPARE_WEB_SOCKET_CHANNEL, CURRENCIES, SIGNATURES } from '../..
 import MarketValues from './MarketValues';
 import PriceLineChart from './PriceLineChart';
 import { ButtonGroup } from '../shared/ButtonGroup';
+import type { Action } from '../../types/actions';
 
-class MarketBTC extends Component {
+type DispatchProps = { getCurrentCryptoCurrency: (string) => void };
+
+type State = { isConnected: boolean };
+
+class MarketBTC extends React.Component<DispatchProps, State> {
   state = { isConnected: false };
-  socket = io.connect(CRYPTO_COMPARE_WEB_SOCKET_CHANNEL);
+  socket: any = io.connect(CRYPTO_COMPARE_WEB_SOCKET_CHANNEL);
   subscription = [SIGNATURES.ETH_F, SIGNATURES.ETH_FV, SIGNATURES.USD_FV];
 
   componentWillUnmount() {
@@ -22,15 +28,15 @@ class MarketBTC extends Component {
   componentDidMount() {
     this.socket.emit('SubAdd', { subs: this.subscription });
     this.setState({ isConnected: true });
-    this.socket.on("m", res => this.props.getCurrentCryptoCurrency(res));
+    this.socket.on("m", (res: string): void => this.props.getCurrentCryptoCurrency(res));
   }
 
-  startConnection = () => {
+  startConnection = (): void => {
     this.socket.emit('SubAdd', { subs: this.subscription });
     this.setState({ isConnected: true });
   }
 
-  stopConnection = () => {
+  stopConnection = (): void => {
     this.socket.emit('SubRemove', { subs: this.subscription });
     this.setState({ isConnected: false });
   }
@@ -54,7 +60,7 @@ class MarketBTC extends Component {
   }
 }
 
-function mapDispatchToProps(dispatch) {
+function mapDispatchToProps(dispatch: Action => void): DispatchProps {
   return bindActionCreators({ ...currenciesActions }, dispatch);
 }
 

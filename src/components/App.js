@@ -1,30 +1,20 @@
-import React, { Component } from 'react';
+// @flow
+import * as React from 'react';
 import { connect } from 'react-redux';
 import { Layout, notification } from 'antd';
-import { asyncComponent } from 'react-async-component';
 import Footer from './layout/Footer';
 import Sidebar from './layout/Sidebar';
+import AppContent from './shared/AppContent';
 import { NAV_TABS } from '../constants';
-
-const AsyncCurrenciesView =  asyncComponent({ resolve: () => import('./currencies/CurrenciesView') });
-const AsyncMarketBTC =  asyncComponent({ resolve: () => import('./currency-market/MarketBTC') });
-const AsyncMarketETH =  asyncComponent({ resolve: () => import('./currency-market/MarketETH') });
+import type { StoreState } from '../types/reducers';
 
 notification.config({ duration: 3 });
 
-const AppContent = ({ tab }) => {
-  switch (tab) {
-    case NAV_TABS.LIST:
-      return <AsyncCurrenciesView/>
-    case NAV_TABS.MARKET_BTC:
-      return <AsyncMarketBTC/>
-    case NAV_TABS.MARKET_ETH:
-      return <AsyncMarketETH/>
-    default:
-  }
+type StateProps = {
+  tab: string
 };
 
-class App extends Component {
+class App extends React.Component<StateProps> {
   render() {
     return (
       <Layout style={{ minHeight: '100vh' }}>
@@ -40,7 +30,7 @@ class App extends Component {
   }
 }
 
-function mapStateToProps(state) {
+function mapStateToProps(state: StoreState): StateProps {
   return { tab: state.app.navigation.tab }
 }
 
