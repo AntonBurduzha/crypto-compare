@@ -12,6 +12,8 @@ import type { Action } from '../../types/actions';
 import type { StoreState } from '../../types/reducers';
 import type { Currency } from '../../types/entities';
 
+import { currentPageListSelector } from '../../selectors';
+
 type StateProps = { fetching: boolean, error: boolean, pageList: Array<Currency> };
 
 type DispatchProps = { fetchCryptoCurrencies: () => void };
@@ -48,7 +50,7 @@ function mapStateToProps(state: StoreState): StateProps {
   return {
     fetching: state.app.currencies.fetching,
     error: state.app.currencies.error,
-    pageList: state.app.currencies.pageList
+    pageList: currentPageListSelector(state)//state.app.currencies.pageList
   };
 }
 

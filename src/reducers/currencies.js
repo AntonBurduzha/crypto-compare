@@ -29,8 +29,8 @@ function currenciesReducer(state: CurrenciesState = initState, action: Action): 
     case 'FAILED_CRYPTO_CURRENCIES': {
       return { ...state, fetching: false, error: true };
     }
-    case 'SET_NEXT_PAGE': {
-      return { ...state, pageList: action.pageList, page: action.index };
+    case 'GET_NEXT_PAGE': {
+      return { ...state, page: action.index };
     }
     case 'SET_SEARCH_CC_VALUE': {
       return { ...state, searchedKey: action.value };

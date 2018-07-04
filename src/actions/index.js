@@ -18,10 +18,6 @@ export const getNextPage = (index: number): Action => {
   return { type: 'GET_NEXT_PAGE', index };
 };
 
-export const setNextPage = (pageList: Array<Currency>, index: number): Action => {
-  return { type: 'SET_NEXT_PAGE', pageList, index };
-};
-
 export const updateListByValue = (filteredList: Array<Currency>, pageList: Array<Currency>): Action => {
   return { type: 'UPDATE_LIST_BY_SEARCH_VALUE', filteredList, pageList };
 };

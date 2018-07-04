@@ -9,8 +9,6 @@ export type FailedCryptoCurrencies = { type: 'FAILED_CRYPTO_CURRENCIES' };
 
 export type GetNextPage = { type: 'GET_NEXT_PAGE', index: number };
 
-export type SetNextPage = { type: 'SET_NEXT_PAGE', pageList: Array<Currency>, index: number };
-
 export type UpdateListByValue = { type: 'UPDATE_LIST_BY_SEARCH_VALUE', filteredList: Array<Currency>, pageList: Array<Currency> };
 
 export type SetNextTab = { type: 'SET_NEXT_TAB', tab: string };
@@ -32,7 +30,6 @@ export type Action = (
   SuccessCryptoCurrencies |
   FailedCryptoCurrencies |
   GetNextPage |
-  SetNextPage |
   UpdateListByValue |
   SetNextTab |
   GetCurrentCryptoCurrency |
