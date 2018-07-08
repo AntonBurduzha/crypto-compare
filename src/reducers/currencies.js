@@ -3,7 +3,7 @@ import { PAGE_SIZE } from '../constants';
 import type { Action } from '../types/actions';
 import type { CurrenciesState } from '../types/reducers';
 
-const initState: CurrenciesState = {
+export const initState: CurrenciesState = {
   fetching: false,
   error: false,
   fullList: [],
