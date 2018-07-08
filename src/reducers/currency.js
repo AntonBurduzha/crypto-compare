@@ -2,7 +2,7 @@
 import type { Action } from '../types/actions';
 import type { CurrencyState } from '../types/reducers';
 
-const initState: CurrencyState = {
+export const initState: CurrencyState = {
   data: {
     CHANGE24HOUR: 'N/A',
     CHANGE24HOURPCT: 'N/A',
