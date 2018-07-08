@@ -26,10 +26,13 @@ export const initState: CurrencyState = {
     VOLUMEHOURTO: 'N/A',
     TIMESTAMP: '',
   },
-  chartData: []
+  chartData: [],
 };
 
-function currencyReducer(state: CurrencyState = initState, action: Action): CurrencyState {
+function currencyReducer(
+  state: CurrencyState = initState,
+  action: Action
+): CurrencyState {
   switch (action.type) {
     case 'SET_CURRENT_CC_STATE': {
       return { ...state, data: { ...state.data, ...action.state } };

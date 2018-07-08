@@ -25,7 +25,8 @@
     "test": "react-scripts test --env=jsdom",
     "coverage": "npm test -- --coverage",
     "eject": "react-scripts eject",
-    "flow": "flow"
+    "flow": "flow",
+    "lint": "prettier --write src/**/*.js"
   },
   "devDependencies": {
     "eslint-plugin-prettier": "^2.6.1",

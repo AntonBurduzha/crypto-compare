@@ -9,18 +9,19 @@ const customSelectorCreator = createSelectorCreator(memoize);
 
 const getFullCCList = (state: StoreState): Array<Currency> => {
   const {
-      searchedKey,
-      filteredList,
-      fullList
-    } : {
-      +searchedKey: string,
-      +filteredList: Array<Currency>,
-      +fullList: Array<Currency>
-    } = state.app.currencies;
-    return searchedKey ? filteredList : fullList;
+    searchedKey,
+    filteredList,
+    fullList,
+  }: {
+    +searchedKey: string,
+    +filteredList: Array<Currency>,
+    +fullList: Array<Currency>,
+  } = state.app.currencies;
+  return searchedKey ? filteredList : fullList;
 };
 
-const getCurrentPageIndex = (state: StoreState): number => state.app.currencies.page;
+const getCurrentPageIndex = (state: StoreState): number =>
+  state.app.currencies.page;
 
 export const currentPageListSelector = customSelectorCreator(
   getFullCCList,
@@ -32,11 +33,12 @@ export const currentPageListSelector = customSelectorCreator(
     if (index === 1) {
       pageList = list.slice(0, PAGE_SIZE);
     } else if (isLastPage) {
-      pageList = list.slice(((index * PAGE_SIZE) - PAGE_SIZE));
+      pageList = list.slice(index * PAGE_SIZE - PAGE_SIZE);
     } else {
       const endIndex: number = index * PAGE_SIZE;
       const startIndex: number = endIndex - PAGE_SIZE;
       pageList = list.slice(startIndex, endIndex);
     }
     return pageList;
-  });
+  }
+);

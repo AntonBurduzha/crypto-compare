@@ -1,6 +1,10 @@
 // @flow
 import type { Action } from '../types/actions';
-import type { Currency, CurrencyChartItem, CurrencySocketState } from '../types/entities';
+import type {
+  Currency,
+  CurrencyChartItem,
+  CurrencySocketState,
+} from '../types/entities';
 
 export const fetchCryptoCurrencies = (): Action => {
   return { type: 'FETCH_CRYPTO_CURRENCIES' };
@@ -18,7 +22,10 @@ export const getNextPage = (index: number): Action => {
   return { type: 'GET_NEXT_PAGE', index };
 };
 
-export const updateListByValue = (filteredList: Array<Currency>, pageList: Array<Currency>): Action => {
+export const updateListByValue = (
+  filteredList: Array<Currency>,
+  pageList: Array<Currency>
+): Action => {
   return { type: 'UPDATE_LIST_BY_SEARCH_VALUE', filteredList, pageList };
 };
 
@@ -30,7 +37,9 @@ export const getCurrentCryptoCurrency = (msg: string): Action => {
   return { type: 'GET_CURRENT_CC_STATE', msg };
 };
 
-export const setCurrentCryptoCurrency = (state: CurrencySocketState): Action => {
+export const setCurrentCryptoCurrency = (
+  state: CurrencySocketState
+): Action => {
   return { type: 'SET_CURRENT_CC_STATE', state };
 };
 

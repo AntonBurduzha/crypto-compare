@@ -10,19 +10,19 @@ import type { StoreState } from '../types/reducers';
 notification.config({ duration: 3 });
 
 type StateProps = {
-  tab: string
+  tab: string,
 };
 
 class App extends React.Component<StateProps> {
   render() {
     return (
       <Layout style={{ minHeight: '100vh' }}>
-        <Sidebar/>
+        <Sidebar />
         <Layout>
           <Layout.Content>
-            <AppContent tab={this.props.tab}/>
+            <AppContent tab={this.props.tab} />
           </Layout.Content>
-          <Footer/>
+          <Footer />
         </Layout>
       </Layout>
     );
@@ -30,7 +30,7 @@ class App extends React.Component<StateProps> {
 }
 
 function mapStateToProps(state: StoreState): StateProps {
-  return { tab: state.app.navigation.tab }
+  return { tab: state.app.navigation.tab };
 }
 
 export default connect(mapStateToProps)(App);

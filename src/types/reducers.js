@@ -1,13 +1,17 @@
 // @flow
-import type { CurrencySocketState, CurrencyChartItem, Currency } from './entities';
+import type {
+  CurrencySocketState,
+  CurrencyChartItem,
+  Currency,
+} from './entities';
 
 export type NavState = {
-  +tab: string
+  +tab: string,
 };
 
 export type CurrencyState = {
   +data: CurrencySocketState,
-  +chartData: Array<CurrencyChartItem>
+  +chartData: Array<CurrencyChartItem>,
 };
 
 export type CurrenciesState = {
@@ -17,13 +21,13 @@ export type CurrenciesState = {
   +filteredList: Array<Currency>,
   +pageList: Array<Currency>,
   +page: number,
-  +searchedKey: string
+  +searchedKey: string,
 };
 
 export type StoreState = {
   +app: {
     +currencies: CurrenciesState,
     +currency: CurrencyState,
-    +navigation: NavState
-  }
+    +navigation: NavState,
+  },
 };

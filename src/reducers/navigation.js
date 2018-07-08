@@ -8,7 +8,10 @@ const initState: NavState = {
 
 type Action = GetNextPage | SetNextTab;
 
-function navigationReducer(state: NavState = initState, action: Action): NavState {
+function navigationReducer(
+  state: NavState = initState,
+  action: Action
+): NavState {
   switch (action.type) {
     case 'SET_NEXT_TAB': {
       return { ...state, tab: action.tab };

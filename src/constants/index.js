@@ -12,17 +12,17 @@ export const PAGE_SIZE: number = 32;
 export const NAV_TABS: NavTabs = Object.freeze({
   LIST: 'list',
   MARKET_BTC: 'marketBTC',
-  MARKET_ETH: 'marketETH'
+  MARKET_ETH: 'marketETH',
 });
 
 export const CURRENCIES: Currencies = Object.freeze({
   USD: 'USD',
   BTC: 'BTC',
-  ETH: 'ETH'
+  ETH: 'ETH',
 });
 
 //Format: {SubscriptionId}~{ExchangeName}~{FromSymbol}~{ToSymbol}
-//Use SubscriptionId 0 for TRADE, 2 for CURRENT, 5 for CURRENTAGG eg use key '5~CCCAGG~BTC~USD' to get aggregated data from the CCCAGG exchange 
+//Use SubscriptionId 0 for TRADE, 2 for CURRENT, 5 for CURRENTAGG eg use key '5~CCCAGG~BTC~USD' to get aggregated data from the CCCAGG exchange
 //Full Volume Format: 11~{FromSymbol} eg use '11~BTC' to get the full volume of BTC against all coin pairs
 //For aggregate quote updates use CCCAGG ags market
 export const SIGNATURES: Signatures = Object.freeze({

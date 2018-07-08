@@ -9,7 +9,7 @@ import type { CurrencySocketState, CurrencyChartItem } from '../types/entities';
 import type { StoreState } from '../types/reducers';
 
 function* setCurrentCryptoCurrencyState({ msg }: { msg: string }): Saga<void> {
-  const messageType: string = msg.substring(0, msg.indexOf("~"));
+  const messageType: string = msg.substring(0, msg.indexOf('~'));
   let state: CurrencySocketState | { [key: string]: any } = {};
   if (messageType === CCC.STATIC.TYPE.CURRENTAGG) {
     state = yield call(UnpackUtils.dataUnpack, msg);
@@ -24,10 +24,10 @@ function* setCurrentCryptoCurrencyState({ msg }: { msg: string }): Saga<void> {
 function* updateChartData(): Saga<void> {
   const {
     data,
-    chartData
-  } : {
+    chartData,
+  }: {
     data: CurrencySocketState,
-    chartData: Array<CurrencyChartItem>
+    chartData: Array<CurrencyChartItem>,
   } = yield select((state: StoreState): mixed => state.app.currency);
 
   if (chartData.length < 10) {

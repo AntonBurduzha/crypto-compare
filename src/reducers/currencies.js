@@ -10,10 +10,13 @@ export const initState: CurrenciesState = {
   filteredList: [],
   pageList: [],
   page: 1,
-  searchedKey: ''
+  searchedKey: '',
 };
 
-function currenciesReducer(state: CurrenciesState = initState, action: Action): CurrenciesState {
+function currenciesReducer(
+  state: CurrenciesState = initState,
+  action: Action
+): CurrenciesState {
   switch (action.type) {
     case 'FETCH_CRYPTO_CURRENCIES': {
       return { ...state, fetching: true, error: false };
@@ -36,7 +39,11 @@ function currenciesReducer(state: CurrenciesState = initState, action: Action): 
       return { ...state, searchedKey: action.value };
     }
     case 'UPDATE_LIST_BY_SEARCH_VALUE': {
-      return { ...state, pageList: action.pageList, filteredList: action.filteredList };
+      return {
+        ...state,
+        pageList: action.pageList,
+        filteredList: action.filteredList,
+      };
     }
     default:
       return state;
