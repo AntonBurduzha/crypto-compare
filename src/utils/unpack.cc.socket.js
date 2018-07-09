@@ -22,15 +22,8 @@ export function dataUnpack(message) {
     data['LASTTRADEID'] = parseInt(data['LASTTRADEID'], 10).toFixed(0);
   }
   if (data['PRICE'] && data['OPEN24HOUR']) {
-    data['CHANGE24HOUR'] = CCC.convertValueToDisplay(
-      toSym,
-      data['PRICE'] - data['OPEN24HOUR']
-    );
-    data['CHANGE24HOURPCT'] =
-      (
-        ((data['PRICE'] - data['OPEN24HOUR']) / data['OPEN24HOUR']) *
-        100
-      ).toFixed(2) + '%';
+    data['CHANGE24HOUR'] = CCC.convertValueToDisplay(toSym, data['PRICE'] - data['OPEN24HOUR']);
+    data['CHANGE24HOURPCT'] = (((data['PRICE'] - data['OPEN24HOUR']) / data['OPEN24HOUR']) * 100).toFixed(2) + '%';
   }
   return displayData(data, toSym, fromSym);
 }
