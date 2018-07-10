@@ -42,3 +42,5 @@ export const currentPageListSelector = customSelectorCreator(
     return pageList;
   }
 );
+
+export const ccFullListSelector = (state: StoreState): Array<Currency> => state.app.currencies.fullList;

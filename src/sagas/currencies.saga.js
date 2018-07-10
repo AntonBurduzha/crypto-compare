@@ -8,6 +8,7 @@ import Api from '../api';
 import type { Currency, Currencies } from '../types/entities';
 import type { StoreState } from '../types/reducers';
 import { values } from '../utils/flow.utils';
+import { ccFullListSelector } from '../selectors';
 
 export function* fetchCurrencies(): Saga<void> {
   try {
@@ -31,7 +32,8 @@ export function* updateCurrenciesList({ value }: { value: string }): Saga<void> 
   const isValueMatchToListProp = (c: Currency, prop: string): boolean => {
     return c[prop].toLowerCase().includes(value.toLowerCase());
   }
-  const fullList: Array<Currency> = yield select((state: StoreState): Array<Currency> => state.app.currencies.fullList);
+
+  const fullList: Array<Currency> = yield select(ccFullListSelector);
 
   const filteredList: Array<Currency> = fullList.filter((cc: Currency): boolean => {
       return isValueMatchToListProp(cc, 'CoinName') || isValueMatchToListProp(cc, 'Name');
