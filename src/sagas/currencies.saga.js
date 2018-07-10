@@ -9,17 +9,17 @@ import type { Currency, Currencies } from '../types/entities';
 import type { StoreState } from '../types/reducers';
 import { values } from '../utils/flow.utils';
 
-function* fetchCurrencies(): Saga<void> {
+export function* fetchCurrencies(): Saga<void> {
   try {
-    const { Data } : { Data: Currencies } = yield call(Api.getCryptoCurrenciesList);
-    const list: Array<Currency> = values(Data);
-    yield put(actions.successCryptoCurrencies(list));
+    const list: Currencies = yield call(Api.getCryptoCurrenciesList);
+    yield put(actions.successCryptoCurrencies(values(list)));
   } catch (e) {
     yield put(actions.failedCryptoCurrencies());
-    notification.error({
+    const errMessage = {
       message: 'Unexpected result!',
       description: 'Something went wrong. Try later or go away from this app.',
-    });
+    }
+    yield call(notification.error, errMessage);
   }
 }
 
@@ -27,7 +27,7 @@ export function* fetchCurrenciesRequest(): Saga<void> {
   yield takeEvery('FETCH_CRYPTO_CURRENCIES', fetchCurrencies);
 }
 
-function* updateCurrenciesList({ value }: { value: string }): Saga<void> {
+export function* updateCurrenciesList({ value }: { value: string }): Saga<void> {
   const isValueMatchToListProp = (c: Currency, prop: string): boolean => {
     return c[prop].toLowerCase().includes(value.toLowerCase());
   }

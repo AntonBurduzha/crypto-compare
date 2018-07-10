@@ -1,5 +1,4 @@
 import mockAxios from 'axios';
-//import MockAdapter from 'axios-mock-adapter';
 import Api from '../index';
 import { CRYPRO_COMPARE_NEW_API } from '../../constants';
 
@@ -9,13 +8,13 @@ describe('getCryptoCurrenciesList api call', () => {
   });
 
   it('should return resolved promise with data', async() => {
-    const data = [
+    const list = [
       { name: 'Anton', age: 24 },
       { name: 'NotAnton', age: 24 },
     ];
-    mockAxios.get.mockImplementationOnce(() => Promise.resolve({ data }));
+    mockAxios.get.mockImplementationOnce(() => Promise.resolve({ data: { Data: list } }));
     const cc = await Api.getCryptoCurrenciesList();
-    expect(cc).toEqual(data);
+    expect(cc).toEqual(list);
     expect(mockAxios.get).toHaveBeenCalledTimes(1);
     expect(mockAxios.get).toHaveBeenCalledWith(`${CRYPRO_COMPARE_NEW_API}/data/all/coinlist`);
   });
