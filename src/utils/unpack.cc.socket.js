@@ -1,5 +1,4 @@
-import { CCC } from '../utils/ccc-streamer-utilities';
-import { Object } from 'core-js';
+import { CCC } from './ccc-streamer-utilities';
 
 const globals = {
   VOLUME24HOUR: 0,

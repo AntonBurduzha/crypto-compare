@@ -6,7 +6,6 @@ import { PAGE_SIZE } from '../constants';
 import * as actions from '../actions';
 import Api from '../api';
 import type { Currency, Currencies } from '../types/entities';
-import type { StoreState } from '../types/reducers';
 import { values } from '../utils/flow.utils';
 import { ccFullListSelector } from '../selectors';
 

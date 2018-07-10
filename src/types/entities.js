@@ -50,3 +50,8 @@ export type CurrencyChartItem = {
   PRICE: number,
   TIMESTAMP: string,
 };
+
+export type ccDataForChart = {
+  data: CurrencySocketState,
+  chartData: Array<CurrencyChartItem>,
+};

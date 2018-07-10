@@ -44,3 +44,5 @@ export const currentPageListSelector = customSelectorCreator(
 );
 
 export const ccFullListSelector = (state: StoreState): Array<Currency> => state.app.currencies.fullList;
+
+export const ccDataSelector = (state: StoreState): mixed => state.app.currency;

@@ -5,10 +5,11 @@ import moment from 'moment';
 import * as actions from '../actions';
 import { CCC } from '../utils/ccc-streamer-utilities';
 import * as UnpackUtils from '../utils/unpack.cc.socket';
-import type { CurrencySocketState, CurrencyChartItem } from '../types/entities';
+import type { CurrencySocketState, CurrencyChartItem, ccDataForChart } from '../types/entities';
 import type { StoreState } from '../types/reducers';
+import { ccDataSelector } from '../selectors';
 
-function* setCurrentCryptoCurrencyState({ msg }: { msg: string }): Saga<void> {
+export function* setCurrentCryptoCurrencyState({ msg }: { msg: string }): Saga<void> {
   const messageType: string = msg.substring(0, msg.indexOf('~'));
   let state: CurrencySocketState | { [key: string]: any } = {};
   if (messageType === CCC.STATIC.TYPE.CURRENTAGG) {
@@ -21,25 +22,25 @@ function* setCurrentCryptoCurrencyState({ msg }: { msg: string }): Saga<void> {
   yield call(updateChartData);
 }
 
-function* updateChartData(): Saga<void> {
-  const {
-    data,
-    chartData,
-  }: {
-    data: CurrencySocketState,
-    chartData: Array<CurrencyChartItem>,
-  } = yield select((state: StoreState): mixed => state.app.currency);
+export function* updateChartData(): Saga<void> {
+  const ccChartData: ccDataForChart = yield select(ccDataSelector);
 
-  if (chartData.length < 10) {
+  if (ccChartData.chartData.length < 10) {
     const list: Array<CurrencyChartItem> = [
-      ...chartData,
-      ...[{ PRICE: parseFloat(data.PRICE.slice(2).replace(',', '')), TIMESTAMP: data.TIMESTAMP }]
+      ...ccChartData.chartData,
+      ...[{
+        PRICE: parseFloat(ccChartData.data.PRICE.slice(2).replace(',', '')),
+        TIMESTAMP: ccChartData.data.TIMESTAMP
+      }]
     ];
     yield put(actions.setChartData(list));
   } else {
     const list: Array<CurrencyChartItem> = [
-      ...chartData.slice(1),
-      ...[{ PRICE: parseFloat(data.PRICE.slice(2).replace(',', '')), TIMESTAMP: data.TIMESTAMP }]
+      ...ccChartData.chartData.slice(1),
+      ...[{
+        PRICE: parseFloat(ccChartData.data.PRICE.slice(2).replace(',', '')),
+        TIMESTAMP: ccChartData.data.TIMESTAMP
+      }]
     ];
     yield put(actions.setChartData(list));
   }

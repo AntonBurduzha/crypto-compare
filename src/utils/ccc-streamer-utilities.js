@@ -1,6 +1,6 @@
 /* eslint-disable */
 
-export const CCC = CCC || {};
+export const CCC = {};
 
 CCC.STATIC = CCC.STATIC || {};
 
