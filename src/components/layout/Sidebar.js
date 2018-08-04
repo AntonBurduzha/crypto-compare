@@ -18,7 +18,7 @@ type Props = StateProps & DispatchProps;
 
 type NavListObject = { key: string, icon: string, text: string };
 
-class Sidebar extends React.Component<Props, State> {
+export class Sidebar extends React.Component<Props, State> {
 	navList: Array<NavListObject> = [
 		{ key: 'list', icon: 'desktop', text: 'Crypto List' },
 		{ key: 'marketBTC', icon: 'area-chart', text: 'BTC Market' },

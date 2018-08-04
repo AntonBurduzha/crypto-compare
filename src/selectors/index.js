@@ -7,7 +7,7 @@ import memoize from '../utils/memoize';
 
 const customSelectorCreator = createSelectorCreator(memoize);
 
-const getFullCCList = (state: StoreState): Array<Currency> => {
+export const getFullCCList = (state: StoreState): Array<Currency> => {
   const {
     searchedKey,
     filteredList,
@@ -20,7 +20,7 @@ const getFullCCList = (state: StoreState): Array<Currency> => {
   return searchedKey ? filteredList : fullList;
 };
 
-const getCurrentPageIndex = (state: StoreState): number =>
+export const getCurrentPageIndex = (state: StoreState): number =>
   state.app.currencies.page;
 
 export const currentPageListSelector = customSelectorCreator(
