@@ -4,7 +4,9 @@ exports[`Sidebar component matches snapshot 1`] = `
 ShallowWrapper {
   "length": 1,
   Symbol(enzyme.__root__): [Circular],
-  Symbol(enzyme.__unrendered__): <Sidebar />,
+  Symbol(enzyme.__unrendered__): <Sidebar
+    getNextTab={[Function]}
+/>,
   Symbol(enzyme.__renderer__): Object {
     "batchedUpdates": [Function],
     "getNode": [Function],
@@ -60,7 +62,7 @@ ShallowWrapper {
                 </span>
         </MenuItem>
 </Menu>,
-      "collapsed": false,
+      "collapsed": true,
       "collapsedWidth": 80,
       "collapsible": true,
       "defaultCollapsed": false,
@@ -300,7 +302,7 @@ ShallowWrapper {
                     </span>
           </MenuItem>
 </Menu>,
-        "collapsed": false,
+        "collapsed": true,
         "collapsedWidth": 80,
         "collapsible": true,
         "defaultCollapsed": false,

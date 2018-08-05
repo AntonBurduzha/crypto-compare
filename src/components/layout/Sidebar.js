@@ -48,11 +48,11 @@ export class Sidebar extends React.Component<Props, State> {
 	}
 }
 
-function mapStateToProps(state: StoreState): StateProps {
+export function mapStateToProps(state: StoreState): StateProps {
 	return { tab: state.app.navigation.tab }
 }
 
-function mapDispatchToProps(dispatch: Action => void): DispatchProps {
+export function mapDispatchToProps(dispatch: Action => void): DispatchProps {
 	return bindActionCreators({ ...navActions }, dispatch);
 }
 

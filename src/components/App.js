@@ -13,23 +13,23 @@ type StateProps = {
   tab: string,
 };
 
-class App extends React.Component<StateProps> {
+export class App extends React.Component<StateProps> {
   render() {
     return (
       <Layout style={{ minHeight: '100vh' }}>
-        <Sidebar />
+        <Sidebar/>
         <Layout>
           <Layout.Content>
             <AppContent tab={this.props.tab} />
           </Layout.Content>
-          <Footer />
+          <Footer/>
         </Layout>
       </Layout>
     );
   }
 }
 
-function mapStateToProps(state: StoreState): StateProps {
+export function mapStateToProps(state: StoreState): StateProps {
   return { tab: state.app.navigation.tab };
 }
 
