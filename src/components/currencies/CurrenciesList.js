@@ -18,7 +18,7 @@ const CurrenciesList = (props: Props): Element<any> =>
               hoverable
               style={{ width: 140, textAlign: 'center' }}
               cover={
-                <a href={`${CRYPRO_COMPARE_OLD_API}${item.Url}`} target="_blank">
+                <a href={`${CRYPRO_COMPARE_OLD_API}${item.Url}`} target="_blank" rel="noopener">
                   <img alt={item.FullName} src={`${CRYPRO_COMPARE_OLD_API}${item.ImageUrl}`}/>
                 </a>
               }

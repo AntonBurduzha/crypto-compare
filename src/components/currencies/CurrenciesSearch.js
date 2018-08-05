@@ -8,7 +8,7 @@ import type { Action } from '../../types/actions';
 
 type DispatchProps = { searchCryptoCurrencies: (string) => void };
 
-class CurrenciesSearch extends React.Component<DispatchProps> {
+export class CurrenciesSearch extends React.Component<DispatchProps> {
   onSearch = (value: string): void => this.props.searchCryptoCurrencies(value);
 
   render() {
@@ -23,7 +23,7 @@ class CurrenciesSearch extends React.Component<DispatchProps> {
   }
 }
 
-function mapDispatchToProps(dispatch: Action => void): DispatchProps {
+export function mapDispatchToProps(dispatch: Action => void): DispatchProps {
   return bindActionCreators({ ...currenciesActions }, dispatch);
 }
 

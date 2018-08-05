@@ -20,7 +20,7 @@ type DispatchProps = { fetchCryptoCurrencies: () => void };
 
 type Props = StateProps & DispatchProps;
 
-class CurrenciesView extends React.Component<Props> {
+export class CurrenciesView extends React.Component<Props> {
   componentDidMount() {
     this.props.fetchCryptoCurrencies();
   }
@@ -46,15 +46,15 @@ class CurrenciesView extends React.Component<Props> {
   }
 }
 
-function mapStateToProps(state: StoreState): StateProps {
+export function mapStateToProps(state: StoreState): StateProps {
   return {
     fetching: state.app.currencies.fetching,
     error: state.app.currencies.error,
-    pageList: currentPageListSelector(state)//state.app.currencies.pageList
+    pageList: currentPageListSelector(state)
   };
 }
 
-function mapDispatchToProps(dispatch: Action => void): DispatchProps {
+export function mapDispatchToProps(dispatch: Action => void): DispatchProps {
   return bindActionCreators({ ...currenciesActions }, dispatch);
 }
 
