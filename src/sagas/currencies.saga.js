@@ -30,7 +30,7 @@ export function* fetchCurrenciesRequest(): Saga<void> {
 export function* updateCurrenciesList({ value }: { value: string }): Saga<void> {
   const isValueMatchToListProp = (c: Currency, prop: string): boolean => {
     return c[prop].toLowerCase().includes(value.toLowerCase());
-  }
+  };
 
   const fullList: Array<Currency> = yield select(ccFullListSelector);
 

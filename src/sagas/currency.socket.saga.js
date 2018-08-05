@@ -6,7 +6,6 @@ import * as actions from '../actions';
 import { CCC } from '../utils/ccc-streamer-utilities';
 import * as UnpackUtils from '../utils/unpack.cc.socket';
 import type { CurrencySocketState, CurrencyChartItem, ccDataForChart } from '../types/entities';
-import type { StoreState } from '../types/reducers';
 import { ccDataSelector } from '../selectors';
 
 export function* setCurrentCryptoCurrencyState({ msg }: { msg: string }): Saga<void> {
