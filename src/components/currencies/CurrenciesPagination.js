@@ -15,7 +15,7 @@ type DispatchProps = { getNextPage: (number) => void };
 
 type Props = StateProps & DispatchProps;
 
-class CurrenciesPagination extends React.Component<Props> {
+export class CurrenciesPagination extends React.Component<Props> {
   onChangePage = (pageNumber: number): void => this.props.getNextPage(pageNumber);
 
   render() {
@@ -40,7 +40,7 @@ class CurrenciesPagination extends React.Component<Props> {
   }
 }
 
-function mapStateToProps(state: StoreState): StateProps {
+export function mapStateToProps(state: StoreState): StateProps {
   return {
     searchedKey: state.app.currencies.searchedKey,
     filteredList: state.app.currencies.filteredList,
@@ -49,7 +49,7 @@ function mapStateToProps(state: StoreState): StateProps {
   };
 }
 
-function mapDispatchToProps(dispatch: Action => void): DispatchProps {
+export function mapDispatchToProps(dispatch: Action => void): DispatchProps {
   return bindActionCreators({ ...currenciesActions }, dispatch);
 }
 
