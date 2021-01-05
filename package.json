@@ -4,7 +4,7 @@
   "private": true,
   "dependencies": {
     "antd": "^3.6.3",
-    "axios": "^0.18.0",
+    "axios": "^0.21.1",
     "enzyme": "^3.3.0",
     "enzyme-adapter-react-16": "^1.1.1",
     "flow-bin": "^0.75.0",
